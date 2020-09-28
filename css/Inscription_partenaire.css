@@ -1,3 +1,37 @@
+/* -----------------------------------------------------My Own code---------------------------------------------------- */
+
+.input-container{
+	background: white;
+	height: 86.745px !important;
+	bottom: 83px !important;
+
+}
+
+.input-container label {
+	color: #f4504a;
+	margin-left: 25px;
+	font-size: 24px;
+}
+
+.input-container input {
+	font-family: 'Times New Roman', Times, serif;
+	font-size: 25px;
+	color: rgba(0,0,0,.7);
+	height: 60px;
+	width: 420.987px;
+	margin-left: 25px;
+	border-bottom: 1px solid rgba(0, 0, 0, .6);
+}
+}
+
+
+.input-container input:focus {
+	outline: none;
+}
+}
+
+
+/* -----------------------------------------------------My Own code---------------------------------------------------- */
 .mediaViewInfo {
 	--web-view-name: Inscription-partenaire;
 	--web-view-id: Inscription-partenaire;
