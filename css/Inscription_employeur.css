@@ -1,3 +1,40 @@
+
+
+
+
+.input-container{
+	background: white;
+	height: 86.745px !important;
+}
+
+.input-container label {
+	color: #f4504a;
+	margin-left: 25px;
+	font-size: 24px;
+}
+
+.input-container input {
+	font-size: 25px;
+	color: rgba(0,0,0,.7);
+	height: 60px;
+	width: 420.987px;
+	margin-left: 25px;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.6);
+	font-family: 'Times New Roman', Times, serif;
+}
+
+.input-container input:focus {
+	outline: none;
+}
+
+
+
+
+
+
+
+
+
 .mediaViewInfo {
 	--web-view-name: Inscription-employeur;
 	--web-view-id: Inscription-employeur;
@@ -229,7 +266,7 @@
 	width: 444.987px;
 	height: 68.745px;
 	left: 797px;
-	top: 84px;
+	top: 60px;
 	overflow: visible;
 }
 #Rectangle_151_eif {
@@ -280,7 +317,7 @@
 	width: 444.987px;
 	height: 68.745px;
 	left: 797px;
-	top: 183px;
+	top: 170px;
 	overflow: visible;
 }
 #Rectangle_151_eij {
@@ -331,7 +368,7 @@
 	width: 444.987px;
 	height: 68.745px;
 	left: 797px;
-	top: 282px;
+	top: 290px;
 	overflow: visible;
 }
 #Rectangle_151_ein {
@@ -382,7 +419,7 @@
 	width: 444.987px;
 	height: 68.745px;
 	left: 797px;
-	top: 381px;
+	top: 400px;
 	overflow: visible;
 }
 #Rectangle_151_eir {
