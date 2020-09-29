@@ -727,7 +727,7 @@
 	width: 136.946px;
 	height: 69.153px;
 	left: 797px;
-	top: 1010px;
+	top: 750px;
 	overflow: visible;
 	--web-animation: fadein 0.3s ease-out;
 	--web-action-type: page;
@@ -771,8 +771,8 @@
 }
 #OU_eo {
 	opacity: 0.4;
-	left: 956.195px;
-	top: 1034.934px;
+	left: 965.195px;
+	top: 800px;
 	position: absolute;
 	overflow: visible;
 	width: 21px;
@@ -788,8 +788,8 @@
 	letter-spacing: 0.2px;
 }
 #Se_connecter_eo {
-	left: 993.539px;
-	top: 1030.577px;
+	left: 998.539px;
+	top: 795px;
 	position: absolute;
 	overflow: visible;
 	width: 104px;
@@ -804,7 +804,7 @@
 	font-family: Exo 2;
 	font-style: normal;
 	font-weight: bold;
-	font-size: 18px;
+	font-size: 25px;
 	color: rgba(36,38,38,1);
 }
 #Groupe_2214 {
