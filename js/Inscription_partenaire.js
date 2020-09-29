@@ -3,7 +3,9 @@
 
 function submit() {
 	inputs = document.getElementsByTagName("input");
+	courriel = document.getElementById("cr").value;
 	var regex = /^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$/;
+	var regex_num = /^0{2}|\+?(1[.-])?(\(\d{3}\)[.-]|(\d{3}[.-]?)){2}\d{4}$/;
 
 	for (let i = 0; i < inputs.length; i++) {
 		if (inputs[i].value == "") {
@@ -13,9 +15,12 @@ function submit() {
 			modalShow("Veuillez entrer le "+ name);
 			break;
 		}
-		if (i == 2 && !regex.test(inputs[i])){
-			modalShow("Le couriel n'est pas valide !");
+		if (i == 2 && !regex.test(inputs[2].value)){
+			modalShow("Le courriel n'est pas valide ! ");
 			break;
+		}
+		if (i == 3 && !regex_num.test(inputs[i])){
+			modalShow("Le numéro de téléphone est invalide")
 		}
 	}
 
