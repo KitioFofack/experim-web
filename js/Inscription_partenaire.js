@@ -1,3 +1,32 @@
+
+// My Own code 
+
+function submit() {
+	inputs = document.getElementsByTagName("input");
+	var regex = /^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$/;
+
+	for (let i = 0; i < inputs.length; i++) {
+		if (inputs[i].value == "") {
+			name = inputs[i].name;
+			name = name.replace('_', ' ');
+			name = name.replace('_', ' ');
+			modalShow("Veuillez entrer le "+ name);
+			break;
+		}
+		if (i == 2 && !regex.test(inputs[i])){
+			modalShow("Le couriel n'est pas valide !");
+			break;
+		}
+	}
+
+}
+
+
+
+// My Own code 
+
+
+
 ///////////////////////////////////////
 // INITIALIZATION
 ///////////////////////////////////////
