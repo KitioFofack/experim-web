@@ -4,7 +4,55 @@
 	My Own Code
 */
 
+function pageRedirect() {
+	window.location.replace("Confirmation_d_inscription.html");
+}
 
+
+$(document).ready(
+	function () {
+
+		var button = $('#custom-alert-box-button');
+
+		//My submit function	
+		button.on("click", function (event) {
+			
+			//get all champs
+			var tab_input = $(":input");
+			var regex = /^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$/;
+			var count_err = 0;
+
+			for (let index = 0; index < 4; index++) {
+				
+				if (tab_input[index].value=="") {
+					
+					//check if name attribute contains underscore and replace it with space
+					while(tab_input[index].name.indexOf('_') >= 0) {
+						tab_input[index].name = tab_input[index].name.replace('_',' ');
+					}
+					//show alert dialog
+					modalShow("Le champs "+tab_input[index].name+" n'est pas valide !");
+					count_err = count_err +1;
+					break;
+				}
+			}
+
+
+
+			// redirect if it has no problem
+			if (count_err == 0) {
+				if (!regex.test(tab_input[2].value)) {
+					modalShow("Le champs "+tab_input[2].name+" n'est pas valide !");
+				}
+				else
+				{
+					pageRedirect();
+				}
+			}
+
+		});
+	}
+);
 
 
 

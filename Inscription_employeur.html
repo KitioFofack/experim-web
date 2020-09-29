@@ -10,7 +10,14 @@
 		<!-- Adding popup css -->
 		<link rel="stylesheet" type="text/css" id="applicationStylesheet" href="css/shared/popup.css"/>
 
+			<!-- Adding bootstrapp and jquery js files -->
+		<script type="text/javascript" src="js/shared/bootstrap/jquery.min.js"></script>
+		<script type="text/javascript" src="js/shared/bootstrap/bootstrap.js"></script>
+		
+			<!-- Adding popup js -->
+		<script id="applicationScript" type="text/javascript" src="js/shared/popup.js"></script>
 		<script id="applicationScript" type="text/javascript" src="js/Inscription_employeur.js"></script>
+		
 	</head>
 
 	<body>
@@ -68,13 +75,13 @@
 
 		<div data-type="Group" data-name="Groupe 818" id="Groupe_818_eie" class="input-container">
 			<label for="Nom">Nom de l'entreprise</label>
-			<input type="text" name="name_enterprise" class="name_enterprise" placeholder="Votre nom" required>
+			<input type="text" name="nom_entreprise" class="name_enterprise" placeholder="Votre nom" required>
 		</div>
 
 
 		<div data-type="Group" data-name="Groupe 819" id="Groupe_819_eii" class="input-container">
 			<label for="Nom">Nom du contact</label>
-			<input type="text" name="name_contact" class="name_contact" placeholder="Votre contact" required>
+			<input type="text" name="nom_du_contact" class="name_contact" placeholder="Votre contact" required>
 		</div>
 
 		<div data-type="Group" data-name="Groupe 820" id="Groupe_820_eim" class="input-container">
@@ -84,7 +91,7 @@
 
 		<div data-type="Group" data-name="Groupe 821" id="Groupe_821_eiq" class="input-container">
 			<label for="Nom">Numéro de téléphone</label>
-			<input type="tel" name="contact" placeholder="Votre numéro de téléphone">
+			<input type="tel" name="numero_de_telephone" placeholder="Votre numéro de téléphone">
 		</div>
 
 		<!-- <div data-type="Group" data-name="Groupe 822" id="Groupe_822_eiu" class="input-container">
@@ -111,17 +118,10 @@
 				<span>Nom</span>
 			</div>
 		</div> -->
-		<div data-type="Group" data-name="Groupe 827" onclick="application.goToTargetView(event)" id="Groupe_827_eje">
-			<div data-type="Group" data-name="Groupe 828" id="Groupe_828_ejf">
-				<svg data-type="Rectangle" data-name="Rectangle 152" class="Rectangle_152_ejg">
-					<rect id="Rectangle_152_ejg" rx="10" ry="10" x="0" y="0" width="136.946" height="69.153">
-					</rect>
-				</svg>
-				<div data-type="Text" data-name="S’inscrire" id="Sinscrire_ejh">
-					<span>S’inscrire</span>
-				</div>
-			</div>
+		<div data-type="Group" data-name="Groupe 827" id="Groupe_827_eje">
+				<button id="custom-alert-box-button">S'inscrire</button>
 		</div>
+
 		<div data-type="Text" data-name="OU" id="OU_eji">
 			<span>OU</span>
 		</div>
@@ -646,13 +646,5 @@
 	</div>
 	
 	</body>
-
-	<!-- Adding Popup js -->
-	<script type="text/javascript" src="js/shared/popup.js"></script>
-
-
-	<!-- Adding bootstrapp and jquery js files -->
-	<script type="text/javascript" src="js/shared/bootstrap/jquery.min.js"></script>
-	<script type="text/javascript" src="js/shared/bootstrap/bootstrap.js"></script>
 
 </html>

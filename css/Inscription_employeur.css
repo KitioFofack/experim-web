@@ -1,5 +1,5 @@
 
-
+/*My own code*/
 
 
 .input-container{
@@ -26,14 +26,22 @@
 .input-container input:focus {
 	outline: none;
 }
+ 
+#Groupe_827_eje button{
+	background-color: #f4504a;
+	cursor: pointer;
+	padding: 14px;
+	outline: none;
+	width: 135px;
+	font-size: 25px;
+	font-family: 'Times New Roman', Times, serif;
+}
 
 
 
 
 
-
-
-
+/*--------------------------------------------------------------------*/
 
 .mediaViewInfo {
 	--web-view-name: Inscription-employeur;
@@ -723,7 +731,7 @@
 #Groupe_827_eje {
 	position: absolute;
 	width: 136.946px;
-	height: 69.153px;
+	height: 75.153px;
 	left: 797px;
 	top: 1010px;
 	overflow: visible;
