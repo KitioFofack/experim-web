@@ -1,3 +1,47 @@
+
+
+// My Own code 
+
+
+
+
+function submit() {
+	pw = document.getElementById("pw").value;
+	cpw = document.getElementById("cpw").value;
+	inputs = document.getElementsByTagName("input");
+	var regex = /^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$/;
+
+
+	for (let i = 0; i < inputs.length; i++) {
+		if (inputs[i].value == "") {
+			name = inputs[i].name;
+			name = name.replace('_', ' ');
+			name = name.replace('_', ' ');
+			modalShow("Veuillesz entrer le champs "+ name);
+			break;
+		}
+		if (i == 1 && !regex.test(inputs[1])){
+			modalShow("Le champs couriel n'est pas valide !");
+			break;
+		}
+	}
+	
+	
+
+	if (pw != cpw) {
+        var erreur = "Les mots de passe ne sont pas identiques !"
+        modalShow(erreur);
+	}
+
+}
+
+
+
+// My Own code 
+
+
+
+
 ///////////////////////////////////////
 // INITIALIZATION
 ///////////////////////////////////////
