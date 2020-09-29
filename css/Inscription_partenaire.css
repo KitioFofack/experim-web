@@ -21,12 +21,18 @@
 	margin-left: 25px;
 	border-bottom: 1px solid rgba(0, 0, 0, .6);
 }
-}
-
 
 .input-container input:focus {
 	outline: none;
 }
+
+#Groupe_827_eow button{
+	background-color: #f4504a;
+	cursor: pointer;
+    padding: 14px;
+    outline: none;
+    width: 135px;
+    font-size: 25px;
 }
 
 
