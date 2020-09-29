@@ -1,0 +1,44 @@
+button {
+    background-color: #0090c5;
+    position: absolute;
+    border: none;
+    padding: 1em;
+    color: white;
+    margin: 1em;
+    border-radius: 5px;
+}
+
+footer {
+    text-align: center;
+}
+
+.custom-box {
+    position: absolute;
+    top: 42%;
+    left: 42%;
+    border: 4px solid #f4504a;
+    border-radius: 6px;
+    text-align: center;
+    padding: 10px;
+    width: fit-content;
+    height: 100px;
+    background-color: white;
+    margin: auto;
+}
+
+#modal {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+#modal button{
+    position: relative;
+    background-color: #f4504a;
+    color: black;
+    cursor: pointer;
+}
