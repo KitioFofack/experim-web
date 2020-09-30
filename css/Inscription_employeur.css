@@ -427,7 +427,7 @@
 	width: 444.987px;
 	height: 68.745px;
 	left: 797px;
-	top: 400px;
+	top: 415px;
 	overflow: visible;
 }
 #Rectangle_151_eir {
@@ -733,7 +733,7 @@
 	width: 136.946px;
 	height: 75.153px;
 	left: 797px;
-	top: 1010px;
+	top: 665px;
 	overflow: visible;
 	--web-animation: fadein 0.3s ease-out;
 	--web-action-type: page;
@@ -777,8 +777,8 @@
 }
 #OU_eji {
 	opacity: 0.4;
-	left: 956.195px;
-	top: 1034.934px;
+	left: 995.195px;
+	top: 715.934px;
 	position: absolute;
 	overflow: visible;
 	width: 21px;
@@ -789,13 +789,13 @@
 	font-family: Gilroy-Bold;
 	font-style: normal;
 	font-weight: normal;
-	font-size: 14px;
+	font-size: 25px;
 	color: rgba(36,38,38,1);
 	letter-spacing: 0.2px;
 }
 #Se_connecter_ejj {
-	left: 993.539px;
-	top: 1030.577px;
+	left: 1057.539px;
+	top: 711.577px;
 	position: absolute;
 	overflow: visible;
 	width: 104px;
@@ -810,7 +810,7 @@
 	font-family: Exo 2;
 	font-style: normal;
 	font-weight: bold;
-	font-size: 18px;
+	font-size: 25px;
 	color: rgba(36,38,38,1);
 }
 #Groupe_2213 {
