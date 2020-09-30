@@ -38,7 +38,6 @@ $(document).ready(
 			}
 
 
-
 			// redirect if it has no problem
 			if (count_err == 0) {
 				if (!regex.test(tab_input[2].value)) {
@@ -46,15 +45,24 @@ $(document).ready(
 				}
 				else
 				{
-					pageRedirect();
+					//convert data to JSON format
+					var data = {
+						enterprise_name : tab_input[0].value,
+						contact_name : tab_input[1].value,
+						email : tab_input[2].value,
+						phone_number : tab_input[3].value
+					};
+					
+					data = JSON.stringify(data);
+					console.log(data);
+
+					//pageRedirect();
 				}
 			}
 
 		});
 	}
 );
-
-
 
 
 ///////////////////////////////////////
