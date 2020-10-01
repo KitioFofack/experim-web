@@ -1,3 +1,48 @@
+
+/*My own code*/
+
+
+.input-container{
+	background: white;
+	height: 86.745px !important;
+}
+
+.input-container label {
+	color: #f4504a;
+	margin-left: 25px;
+	font-size: 24px;
+}
+
+.input-container input {
+	font-size: 25px;
+	color: rgba(0,0,0,.7);
+	height: 60px;
+	width: 420.987px;
+	margin-left: 25px;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.6);
+	font-family: 'Times New Roman', Times, serif;
+}
+
+.input-container input:focus {
+	outline: none;
+}
+ 
+#Groupe_827_eje button{
+	background-color: #f4504a;
+	cursor: pointer;
+	padding: 14px;
+	outline: none;
+	width: 135px;
+	font-size: 25px;
+	font-family: 'Times New Roman', Times, serif;
+}
+
+
+
+
+
+/*--------------------------------------------------------------------*/
+
 .mediaViewInfo {
 	--web-view-name: Inscription-employeur;
 	--web-view-id: Inscription-employeur;
@@ -229,7 +274,7 @@
 	width: 444.987px;
 	height: 68.745px;
 	left: 797px;
-	top: 84px;
+	top: 60px;
 	overflow: visible;
 }
 #Rectangle_151_eif {
@@ -280,7 +325,7 @@
 	width: 444.987px;
 	height: 68.745px;
 	left: 797px;
-	top: 183px;
+	top: 170px;
 	overflow: visible;
 }
 #Rectangle_151_eij {
@@ -331,7 +376,7 @@
 	width: 444.987px;
 	height: 68.745px;
 	left: 797px;
-	top: 282px;
+	top: 290px;
 	overflow: visible;
 }
 #Rectangle_151_ein {
@@ -382,7 +427,7 @@
 	width: 444.987px;
 	height: 68.745px;
 	left: 797px;
-	top: 381px;
+	top: 415px;
 	overflow: visible;
 }
 #Rectangle_151_eir {
@@ -686,9 +731,9 @@
 #Groupe_827_eje {
 	position: absolute;
 	width: 136.946px;
-	height: 69.153px;
+	height: 75.153px;
 	left: 797px;
-	top: 1010px;
+	top: 665px;
 	overflow: visible;
 	--web-animation: fadein 0.3s ease-out;
 	--web-action-type: page;
@@ -732,8 +777,8 @@
 }
 #OU_eji {
 	opacity: 0.4;
-	left: 956.195px;
-	top: 1034.934px;
+	left: 995.195px;
+	top: 715.934px;
 	position: absolute;
 	overflow: visible;
 	width: 21px;
@@ -744,13 +789,13 @@
 	font-family: Gilroy-Bold;
 	font-style: normal;
 	font-weight: normal;
-	font-size: 14px;
+	font-size: 25px;
 	color: rgba(36,38,38,1);
 	letter-spacing: 0.2px;
 }
 #Se_connecter_ejj {
-	left: 993.539px;
-	top: 1030.577px;
+	left: 1057.539px;
+	top: 711.577px;
 	position: absolute;
 	overflow: visible;
 	width: 104px;
@@ -765,7 +810,7 @@
 	font-family: Exo 2;
 	font-style: normal;
 	font-weight: bold;
-	font-size: 18px;
+	font-size: 25px;
 	color: rgba(36,38,38,1);
 }
 #Groupe_2213 {
