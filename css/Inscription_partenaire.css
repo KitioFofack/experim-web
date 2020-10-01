@@ -1,3 +1,42 @@
+/* -----------------------------------------------------My Own code---------------------------------------------------- */
+
+.input-container{
+	background: white;
+	height: 86.745px !important;
+
+}
+
+.input-container label {
+	color: #f4504a;
+	margin-left: 25px;
+	font-size: 24px;
+}
+
+.input-container input {
+	font-family: 'Times New Roman', Times, serif;
+	font-size: 25px;
+	color: rgba(0,0,0,.7);
+	height: 60px;
+	width: 420.987px;
+	margin-left: 25px;
+	border-bottom: 1px solid rgba(0, 0, 0, .6);
+}
+
+.input-container input:focus {
+	outline: none;
+}
+
+#Groupe_827_eow button{
+	background-color: #f4504a;
+	cursor: pointer;
+    padding: 14px;
+    outline: none;
+    width: 135px;
+    font-size: 25px;
+}
+
+
+/* -----------------------------------------------------My Own code---------------------------------------------------- */
 .mediaViewInfo {
 	--web-view-name: Inscription-partenaire;
 	--web-view-id: Inscription-partenaire;
@@ -229,7 +268,7 @@
 	width: 444.987px;
 	height: 68.745px;
 	left: 797px;
-	top: 84px;
+	top: 150px;
 	overflow: visible;
 }
 #Rectangle_151_enx {
@@ -280,7 +319,7 @@
 	width: 444.987px;
 	height: 68.745px;
 	left: 797px;
-	top: 183px;
+	top: 270px;
 	overflow: visible;
 }
 #Rectangle_151_en {
@@ -331,7 +370,7 @@
 	width: 444.987px;
 	height: 68.745px;
 	left: 797px;
-	top: 282px;
+	top: 390px;
 	overflow: visible;
 }
 #Rectangle_151_eoa {
@@ -382,7 +421,7 @@
 	width: 444.987px;
 	height: 68.745px;
 	left: 797px;
-	top: 381px;
+	top: 510px;
 	overflow: visible;
 }
 #Rectangle_151_eob {
@@ -433,7 +472,7 @@
 	width: 444.987px;
 	height: 68.745px;
 	left: 797px;
-	top: 480px;
+	top: 630px;
 	overflow: visible;
 }
 #Rectangle_151_eod {
@@ -484,7 +523,7 @@
 	width: 444.987px;
 	height: 68.745px;
 	left: 797px;
-	top: 579px;
+	top: 750px;
 	overflow: visible;
 }
 #Rectangle_151_eoh {
@@ -688,7 +727,7 @@
 	width: 136.946px;
 	height: 69.153px;
 	left: 797px;
-	top: 1010px;
+	top: 750px;
 	overflow: visible;
 	--web-animation: fadein 0.3s ease-out;
 	--web-action-type: page;
@@ -732,8 +771,8 @@
 }
 #OU_eo {
 	opacity: 0.4;
-	left: 956.195px;
-	top: 1034.934px;
+	left: 965.195px;
+	top: 800px;
 	position: absolute;
 	overflow: visible;
 	width: 21px;
@@ -749,8 +788,8 @@
 	letter-spacing: 0.2px;
 }
 #Se_connecter_eo {
-	left: 993.539px;
-	top: 1030.577px;
+	left: 998.539px;
+	top: 795px;
 	position: absolute;
 	overflow: visible;
 	width: 104px;
@@ -765,7 +804,7 @@
 	font-family: Exo 2;
 	font-style: normal;
 	font-weight: bold;
-	font-size: 18px;
+	font-size: 25px;
 	color: rgba(36,38,38,1);
 }
 #Groupe_2214 {
