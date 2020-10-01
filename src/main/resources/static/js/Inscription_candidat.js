@@ -1,3 +1,53 @@
+
+
+// My Own code 
+
+
+
+
+function submit() {
+	pw = document.getElementById("pw").value;
+	cpw = document.getElementById("cpw").value;
+	inputs = document.getElementsByTagName("input");
+	var regex = /^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$/;
+	var tour = 0;
+
+	for (let i = 0; i < inputs.length; i++) {
+		if (inputs[i].value == "") {
+			name = inputs[i].name;
+			name = name.replace('_', ' ');
+			name = name.replace('_', ' ');
+			modalShow("Veuillesz entrer le champs "+ name);
+			break;
+		}
+		if (i == 1 && !regex.test(inputs[1].value)){
+			modalShow("Le champs couriel n'est pas valide !");
+			break;
+		}
+
+		if (i == 4 && inputs[i].value != inputs[i-1].value) {
+			var erreur = "Les mots de passe ne sont pas identiques !"
+			modalShow(erreur);
+			break;
+		}
+
+		tour+=1;
+	}
+	
+
+	if (tour == 5) {
+		window.location.href='./Confirmation_d_inscription.html';
+	}
+
+}
+
+
+
+// My Own code 
+
+
+
+
 ///////////////////////////////////////
 // INITIALIZATION
 ///////////////////////////////////////

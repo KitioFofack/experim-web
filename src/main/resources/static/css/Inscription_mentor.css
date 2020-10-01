@@ -1,3 +1,58 @@
+
+/* -----------------------------------------------------My Own code---------------------------------------------------- */
+
+.input-container{
+	background: white;
+	height: 86.745px !important;
+}
+
+.input-container label {
+	color: #f4504a;
+	margin-left: 25px;
+	font-size: 24px;
+}
+
+.input-container input {
+	font-family: 'Times New Roman', Times, serif;
+	font-size: 25px;
+	color: rgba(0,0,0,.7);
+	height: 60px;
+	width: 420.987px;
+	margin-left: 25px;
+	border-bottom: 1px solid rgba(0, 0, 0, .6);
+}
+
+.input-container input:focus {
+	outline: none;
+}
+
+#Groupe_827 button{
+	background-color: #f4504a;
+	cursor: pointer;
+    padding: 14px;
+    outline: none;
+    width: 135px;
+    font-size: 25px;
+}
+
+
+#Groupe_827_ecd  button{
+	background-color: #f4504a;
+	cursor: pointer;
+    padding: 14px;
+    outline: none;
+    width: 135px;
+    font-size: 25px;
+}
+
+
+
+/* -----------------------------------------------------My Own code---------------------------------------------------- */
+
+
+
+
+
 .mediaViewInfo {
 	--web-view-name: Inscription-mentor;
 	--web-view-id: Inscription-mentor;
@@ -280,7 +335,7 @@
 	width: 444.987px;
 	height: 68.745px;
 	left: 797px;
-	top: 183px;
+	top: 203px;
 	overflow: visible;
 }
 #Rectangle_151_ebi {
@@ -331,7 +386,7 @@
 	width: 444.987px;
 	height: 68.745px;
 	left: 797px;
-	top: 282px;
+	top: 322px;
 	overflow: visible;
 }
 #Rectangle_151_ebm {
@@ -382,7 +437,7 @@
 	width: 444.987px;
 	height: 68.745px;
 	left: 797px;
-	top: 381px;
+	top: 440px;
 	overflow: visible;
 }
 #Rectangle_151_ebq {
@@ -688,7 +743,7 @@
 	width: 136.946px;
 	height: 69.153px;
 	left: 797px;
-	top: 1010px;
+	top: 750px;
 	overflow: visible;
 	--web-animation: fadein 0.3s ease-out;
 	--web-action-type: page;
@@ -732,8 +787,8 @@
 }
 #OU_ech {
 	opacity: 0.4;
-	left: 956.195px;
-	top: 1034.934px;
+	left: 985.195px;
+	top: 804px;
 	position: absolute;
 	overflow: visible;
 	width: 21px;
@@ -744,13 +799,13 @@
 	font-family: Gilroy-Bold;
 	font-style: normal;
 	font-weight: normal;
-	font-size: 14px;
+	font-size: 25px;
 	color: rgba(36,38,38,1);
 	letter-spacing: 0.2px;
 }
 #Se_connecter_eci {
-	left: 993.539px;
-	top: 1030.577px;
+	left: 1039.539px;
+	top: 800px;
 	position: absolute;
 	overflow: visible;
 	width: 104px;
@@ -765,7 +820,7 @@
 	font-family: Exo 2;
 	font-style: normal;
 	font-weight: bold;
-	font-size: 18px;
+	font-size: 25px;
 	color: rgba(36,38,38,1);
 }
 #Groupe_2211 {
