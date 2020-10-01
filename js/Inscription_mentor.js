@@ -1,3 +1,43 @@
+function submit(event) {
+
+	inputs = document.getElementsByTagName("input");
+	var regex = /^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$/;
+	var tour = 0;
+
+	for (let i = 0; i < inputs.length; i++) {
+		if (inputs[i].value == "") {
+			name = inputs[i].name;
+			name = name.replace('_', ' ');
+			name = name.replace('_', ' ');
+			modalShow("Veuillesz entrer le champs "+ name);
+			break;
+		}
+		if (i == 1 && !regex.test(inputs[i].value)){
+			modalShow("Le champs couriel n'est pas valide !");
+			break;
+		}
+
+		tour+=1;
+		
+	}
+
+	if (tour == 4) {
+		window.location.href='./Confirmation_d_inscription.html';
+	}
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
 ///////////////////////////////////////
 // INITIALIZATION
 ///////////////////////////////////////
