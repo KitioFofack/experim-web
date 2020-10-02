@@ -1,8 +1,14 @@
 #!bin/bash
 
 #clone the repository
+echo "merging main branch to current branch"
+git merge main -m "mergin main to current branch"
 
+#create log folder
 mkdir ~/log-deploy-experim
+
+#rm -old folder
+rm -rf ~/experim-web/target
 
 #install maven
 echo "install maven----------------------------------"
@@ -17,6 +23,5 @@ echo "build project----------------------------------"
 mvn install 2>&1 | tee ~/log-deploy-experim/build_project.log
 
 echo "look into target directory the war files-------"
-
 
 
