@@ -45,11 +45,11 @@ function submit() {
 		}
 
 		var myHeaders = new Headers();
-		myHeaders.append("Authorization", "token 4c93d012bfc4877:d80fc0a8a40e5c0");
+		myHeaders.append("Authorization", "token 4c93d012bfc4877:cc611dbc2de8ba1");
 		myHeaders.append("Content-Type", "application/json");
 		myHeaders.append("Cookie", "sid=Guest; full_name=Guest; system_user=yes; user_image=; user_id=Guest");
 		
-		var raw = JSON.stringify(candidat);
+		var raw = JSON.stringify({"lead_name":"sebastien traore"});
 		
 		var requestOptions = {
 		  method: 'POST',
@@ -58,7 +58,7 @@ function submit() {
 		  redirect: 'follow'
 		};
 		
-		fetch("https://capetc-dev.irex.aretex.ca/api/resource/candidat/", requestOptions)
+		fetch("https://capetc-dev.irex.aretex.ca/api/resource/Lead", requestOptions)
 		  .then(response => response.text())
 		  .then(result => console.log(result))
 		  .catch(error => console.log('error', error));
