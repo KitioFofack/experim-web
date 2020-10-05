@@ -3,8 +3,8 @@
 
 function submit() {
 	inputs = document.getElementsByTagName("input");
-	courriel = document.getElementById("cr").value;
-	var regex = /^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$/;
+	//courriel = document.getElementById("cr").value;
+	var regex_mail = /^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$/;
 	var regex_num = /^0{2}|\+?(1[.-])?(\(\d{3}\)[.-]|(\d{3}[.-]?)){2}\d{4}$/;
 
 	for (let i = 0; i < inputs.length; i++) {
@@ -15,12 +15,34 @@ function submit() {
 			modalShow("Veuillez entrer le "+ name);
 			break;
 		}
-		if (i == 2 && !regex.test(inputs[2].value)){
-			modalShow("Le courriel n'est pas valide ! ");
-			break;
-		}
-		if (i == 3 && !regex_num.test(inputs[i])){
-			modalShow("Le numéro de téléphone est invalide")
+		else if (i == 3){
+		    if (!regex_num.test(inputs[i].value)){
+            	modalShow("Le numéro de téléphone est invalide")
+            	break;
+            }
+            else {
+                var myHeaders = new Headers();
+                myHeaders.append("Authorization", "token 6b751d8f5c688cb:88ace929ef10d55");
+                myHeaders.append("Content-Type", "application/json");
+                myHeaders.append("Accept", "application/json");
+                myHeaders.append("Cookie", "sid=Guest; full_name=Guest; system_user=yes; user_image=; user_id=Guest");
+
+                var raw = JSON.stringify({"corp_name":inputs[0],"contact_name":inputs[1],"email_id":inputs[2],"phone_number":inputs[2]});
+
+                var requestOptions = {
+                  method: 'POST',
+                  headers: myHeaders,
+                  body: raw,
+                  redirect: 'follow'
+                };
+
+                fetch("https://capetc-dev.irex.aretex.ca/api/resource/Lead", requestOptions)
+                  .then(response => response.text())
+                  .then(result => console.log(result))
+                  .catch(error => console.log('error', error));
+                  break;
+            }
+
 		}
 	}
 
