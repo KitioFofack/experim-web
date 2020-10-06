@@ -1,5 +1,10 @@
 
 // My Own code 
+ function Redirect() {
+               window.location = "https://www.tutorialspoint.com";
+            }
+            //document.write("You will be redirected to main page in 10 sec.");
+
 
 function submit() {
 	inputs = document.getElementsByTagName("input");
@@ -25,7 +30,7 @@ function submit() {
 		    }
 		    else {
 		        var settings = {
-                    "url": "http://localhost:8080/submitCandidate",
+                    "url": "http://localhost:8080/submitPartner",
                     "method": "POST",
                     "timeout": 0,
                     "headers": {
@@ -33,9 +38,10 @@ function submit() {
                     },
                     "data": JSON.stringify(
                         {
-                            "nom":inputs[0].value,
-                            "telephone": inputs[2].value,
-                            "courriel":inputs[1].value
+                            "nom_entreprise":inputs[0].value,
+                            "nom_contact": inputs[1].value,
+                            "email": inputs[2].value,
+                            "telephone": inputs[3].value
                         }
                     ),
                 };
