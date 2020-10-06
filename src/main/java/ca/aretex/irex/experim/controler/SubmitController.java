@@ -20,10 +20,10 @@ public class SubmitController {
 
     @Autowired
     private ERPNextService backendService;
-    @PostMapping("/submitCandidate")
+   /* @PostMapping("/submitCandidate")
     public ResponseEntity submitCandidate(@RequestBody Candidate candidate){
         return ResponseEntity.status(backendService.save(candidate)).build();
-    }
+    }*/
 
     @PostMapping("/submitPartner")
     public ResponseEntity submitPartner(@RequestBody Partner partner) {
