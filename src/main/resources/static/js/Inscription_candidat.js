@@ -36,7 +36,27 @@ function submit() {
 	
 
 	if (tour == 5) {
-		window.location.href='./Confirmation_d_inscription.html';
+
+        var settings = {
+            "url": "http://localhost:8080/submitCandidate",
+            "method": "POST",
+            "timeout": 0,
+            "headers": {
+                "Content-Type": "application/json"
+            },
+            "data": JSON.stringify(
+                {
+                    "nom":inputs[0].value,
+                    "telephone": inputs[2].value,
+                    "courriel":inputs[1].value
+                }
+            ),
+        };
+
+    $.ajax(settings).done(function (response) {
+      console.log(response);
+    });
+
 	}
 
 }
