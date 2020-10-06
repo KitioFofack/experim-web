@@ -1,6 +1,7 @@
 package ca.aretex.irex.experim.service;
 
 import ca.aretex.irex.experim.bean.Candidate;
+import ca.aretex.irex.experim.bean.Partner;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,8 +23,8 @@ public class ERPNextService {
     @Value("${erpnextPassword}")
     private String erpnextPassword;
 
-    public HttpStatus save(Candidate candidate) {
-        logger.info("Saving {} in backend {}", candidate, erpnextServerURL );
+    public HttpStatus save(Partner partner) {
+        logger.info("Saving {} in backend {}", partner, erpnextServerURL );
         return HttpStatus.CREATED;
     }
 }
