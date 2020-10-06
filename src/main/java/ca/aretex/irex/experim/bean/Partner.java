@@ -3,7 +3,7 @@ package ca.aretex.irex.experim.bean;
 import lombok.Data;
 
 @Data
-public class Partenaire {
+public class Partner {
     private String nom_entreprise;
     private String nom_contact;
     private String email;
