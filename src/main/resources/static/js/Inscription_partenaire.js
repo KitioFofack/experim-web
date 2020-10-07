@@ -1,7 +1,7 @@
 
 // My Own code 
  function Redirect() {
-               window.location = "https://www.tutorialspoint.com";
+               window.location = "Confirmation_d_inscription.html";
             }
             //document.write("You will be redirected to main page in 10 sec.");
 
