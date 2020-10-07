@@ -7,7 +7,7 @@ import okhttp3.RequestBody;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpStatus;
+import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -16,12 +16,14 @@ import okhttp3.Response;
 
 import java.io.IOException;
 
-
 @Slf4j
 @Service
 public class ERPNextService {
 
     private static Logger logger= LoggerFactory.getLogger(ERPNextService.class);
+
+    private static OkHttpClient client;
+
     @Value("${erpnextInstance}")
     private String erpnextServerURL;
 
@@ -33,6 +35,52 @@ public class ERPNextService {
 
     public HttpStatus save(Candidate candidate) {
         logger.info("Saving {} in backend {}", candidate, erpnextServerURL );
+        Request request;
+        RequestBody body;
+        MediaType mediaType = MediaType.get("application/json; charset=utf-8");
+        CookieJar cookieJar= new PersistentCookieJar();
+        if(client == null) {
+//            Client Connecting to server  only once
+            logger.info("Openning connection");
+
+            client = new OkHttpClient().Builder()
+                           .cookieJar(cookieJar)
+                            .build();
+
+//            body = RequestBody.create("{\"usr\":\""+erpnextAccount+"\",\"pwd\":\""+erpnextPassword+"\"}", mediaType);
+            body = new FormBody.Builder()
+                    .add("usr",erpnextAccount)
+                    .add("pwd",erpnextPassword)
+                    .build();
+            request = new Request.Builder()
+                    .url(erpnextServerURL+ "/api/method/login")
+                    .post(body)
+                    .addHeader("Content-Type", "application/json")
+                    .build();
+            try {
+                Response response = client.newCall(request).execute();
+                logger.info("Client connection successfull : {}",response.toString());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+// Now running the POST request
+
+        body =RequestBody.create( "{\"lead_name\":\""+candidate.getNom()+"\"," +
+                "\"phone\":\""+candidate.getTelephone()+"\"}", mediaType);
+
+
+        request = new Request.Builder()
+                .url(erpnextServerURL+"/api/resource/Lead")
+                .post(body)
+                .addHeader("Content-Type", "application/json")
+                .build();
+        try {
+            Response response = client.newCall(request).execute();
+            logger.info(response.toString());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return HttpStatus.CREATED;
     }
 
