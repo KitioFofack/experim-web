@@ -4,11 +4,15 @@ import ca.aretex.irex.experim.bean.Candidate;
 import ca.aretex.irex.experim.bean.Client;
 import ca.aretex.irex.experim.bean.Partner;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.catalina.connector.Request;
+import org.apache.catalina.connector.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @Slf4j
 @Service
