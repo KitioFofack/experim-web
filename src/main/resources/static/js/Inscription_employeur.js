@@ -67,8 +67,8 @@ $(document).ready(
                                     {
                                         "nom_entreprise": tab_input[0].value,
                                         "nom_du_contact": tab_input[1].value,
-                                        "numero_de_telephone": tab_input[2].value,
-                                        "email" : tab_input[3].value
+                                        "email" : tab_input[2].value
+                                        "numero_de_telephone": tab_input[3].value,
                                     }
                                 ),
                             };
