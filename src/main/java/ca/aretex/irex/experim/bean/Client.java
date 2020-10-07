@@ -1,2 +1,6 @@
-package ca.aretex.irex.experim.bean;public class Client {
+package ca.aretex.irex.experim.bean;
+
+import lombok.Data;
+
+public class Client {
 }
