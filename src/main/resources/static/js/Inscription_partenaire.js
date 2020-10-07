@@ -38,10 +38,10 @@ function submit() {
                     },
                     "data": JSON.stringify(
                         {
-                            "nom_entreprise":inputs[0].value,
-                            "nom_contact": inputs[1].value,
-                            "email": inputs[2].value,
-                            "telephone": inputs[3].value
+                            "company_name":inputs[0].value,
+                            "lead_name": inputs[1].value,
+                            "email_id": inputs[2].value,
+                            "phone": inputs[3].value
                         }
                     ),
                 };
