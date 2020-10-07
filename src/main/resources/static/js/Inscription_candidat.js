@@ -46,9 +46,9 @@ function submit() {
             },
             "data": JSON.stringify(
                 {
-                    "nom":inputs[0].value,
-                    "telephone": inputs[2].value,
-                    "courriel":inputs[1].value
+                    "lead_name":inputs[0].value,
+                    "phone": inputs[2].value,
+                    "email_id":inputs[1].value
                 }
             ),
         };

@@ -1,9 +1,10 @@
 package ca.aretex.irex.experim.service;
 
 import ca.aretex.irex.experim.bean.Candidate;
+import ca.aretex.irex.experim.bean.Client;
+import ca.aretex.irex.experim.bean.Partner;
 import ca.aretex.irex.experim.bean.Employeurs;
 import lombok.extern.slf4j.Slf4j;
-import okhttp3.RequestBody;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -33,54 +34,25 @@ public class ERPNextService {
     @Value("${erpnextPassword}")
     private String erpnextPassword;
 
-    public HttpStatus save(Candidate candidate) {
-        logger.info("Saving {} in backend {}", candidate, erpnextServerURL );
-        Request request;
-        RequestBody body;
-        MediaType mediaType = MediaType.get("application/json; charset=utf-8");
-        CookieJar cookieJar= new PersistentCookieJar();
-        if(client == null) {
-//            Client Connecting to server  only once
-            logger.info("Openning connection");
-
-            client = new OkHttpClient().Builder()
-                           .cookieJar(cookieJar)
-                            .build();
-
-//            body = RequestBody.create("{\"usr\":\""+erpnextAccount+"\",\"pwd\":\""+erpnextPassword+"\"}", mediaType);
-            body = new FormBody.Builder()
-                    .add("usr",erpnextAccount)
-                    .add("pwd",erpnextPassword)
-                    .build();
-            request = new Request.Builder()
-                    .url(erpnextServerURL+ "/api/method/login")
-                    .post(body)
-                    .addHeader("Content-Type", "application/json")
-                    .build();
-            try {
-                Response response = client.newCall(request).execute();
-                logger.info("Client connection successfull : {}",response.toString());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-// Now running the POST request
-
-        body =RequestBody.create( "{\"lead_name\":\""+candidate.getNom()+"\"," +
-                "\"phone\":\""+candidate.getTelephone()+"\"}", mediaType);
-
-
-        request = new Request.Builder()
-                .url(erpnextServerURL+"/api/resource/Lead")
-                .post(body)
-                .addHeader("Content-Type", "application/json")
-                .build();
+    public HttpStatus save(Client clt) {
         try {
+            OkHttpClient client = new OkHttpClient().newBuilder().build();
+            okhttp3.MediaType mediaType = MediaType.parse("application/json");
+
+            okhttp3.RequestBody body = RequestBody.create(mediaType, ""+clt);
+            okhttp3.Request request = new Request.Builder()
+                    .url("https://capetc-dev.irex.aretex.ca/api/resource/Lead")
+                    .method("POST", body)
+                    .addHeader("Authorization", "token 6b751d8f5c688cb:88ace929ef10d55")
+                    .addHeader("Content-Type", "application/json")
+                    .addHeader("Cookie", "sid=Guest")
+                    .build();
+
             Response response = client.newCall(request).execute();
-            logger.info(response.toString());
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
+
         return HttpStatus.CREATED;
     }
 

@@ -2,6 +2,8 @@ package ca.aretex.irex.experim.controler;
 
 import ca.aretex.irex.experim.bean.Candidate;
 import ca.aretex.irex.experim.bean.Employeurs;
+import ca.aretex.irex.experim.bean.Client;
+import ca.aretex.irex.experim.bean.Partner;
 import ca.aretex.irex.experim.service.ERPNextService;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
@@ -20,7 +22,7 @@ public class SubmitController {
 
     @Autowired
     private ERPNextService backendService;
-    @PostMapping("/submitCandidate")
+   @PostMapping("/submitCandidate")
     public ResponseEntity submitCandidate(@RequestBody Candidate candidate){
         return ResponseEntity.status(backendService.save(candidate)).build();
     }
@@ -31,4 +33,9 @@ public class SubmitController {
     }
 
 
+
+    @PostMapping("/submitPartner")
+    public ResponseEntity submitPartner(@RequestBody Partner partner) {
+        return ResponseEntity.status(backendService.save(partner)).build();
+    }
 }
