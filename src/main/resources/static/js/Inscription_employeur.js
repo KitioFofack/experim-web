@@ -56,6 +56,28 @@ $(document).ready(
 					data = JSON.stringify(data);
 					console.log(data);
 
+					var settings = {
+                                "url": "http://localhost:8080/submitEmployeurs",
+                                "method": "POST",
+                                "timeout": 0,
+                                "headers": {
+                                    "Content-Type": "application/json"
+                                },
+                                "data": JSON.stringify(
+                                    {
+                                        "nom_entreprise": tab_input[0].value,
+                                        "nom_du_contact": tab_input[1].value,
+                                        "email" : tab_input[2].value
+                                        "numero_de_telephone": tab_input[3].value,
+                                    }
+                                ),
+                            };
+
+                        $.ajax(settings).done(function (response) {
+                          console.log(response);
+                        });
+
+
 					//pageRedirect();
 				}
 			}
