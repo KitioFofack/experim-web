@@ -1,10 +1,9 @@
 package ca.aretex.irex.experim.controler;
 
 import ca.aretex.irex.experim.bean.Candidate;
-import ca.aretex.irex.experim.bean.Employeurs;
-import ca.aretex.irex.experim.bean.Client;
+import ca.aretex.irex.experim.bean.Employeur;
 import ca.aretex.irex.experim.bean.Partner;
-import ca.aretex.irex.experim.service.ERPNextService;
+import ca.aretex.irex.experim.service.ERPNextRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,18 +20,16 @@ public class SubmitController {
     private static Logger logger= LoggerFactory.getLogger(SubmitController.class);
 
     @Autowired
-    private ERPNextService backendService;
+    private ERPNextRepository backendService;
    @PostMapping("/submitCandidate")
     public ResponseEntity submitCandidate(@RequestBody Candidate candidate){
         return ResponseEntity.status(backendService.save(candidate)).build();
     }
 
     @PostMapping("/submitEmployeurs")
-    public ResponseEntity submitEmployeurs(@RequestBody Employeurs employeurs){
-        return ResponseEntity.status(backendService.save(employeurs)).build();
+    public ResponseEntity submitEmployeurs(@RequestBody Employeur employeur){
+        return ResponseEntity.status(backendService.save(employeur)).build();
     }
-
-
 
     @PostMapping("/submitPartner")
     public ResponseEntity submitPartner(@RequestBody Partner partner) {
