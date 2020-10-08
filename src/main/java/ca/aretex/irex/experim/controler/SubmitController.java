@@ -1,6 +1,7 @@
 package ca.aretex.irex.experim.controler;
 
 import ca.aretex.irex.experim.bean.Candidate;
+import ca.aretex.irex.experim.bean.Mentor;
 import ca.aretex.irex.experim.bean.Employeur;
 import ca.aretex.irex.experim.bean.Partner;
 import ca.aretex.irex.experim.service.ERPNextRepository;
@@ -34,5 +35,11 @@ public class SubmitController {
     @PostMapping("/submitPartner")
     public ResponseEntity submitPartner(@RequestBody Partner partner) {
         return ResponseEntity.status(backendService.save(partner)).build();
+    }
+
+    @PostMapping("/submitMentor")
+    public ResponseEntity submitMentor(@RequestBody Mentor mentor)
+    {
+        return ResponseEntity.status(backendService.save(mentor)).build();
     }
 }
