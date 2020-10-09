@@ -1,8 +1,7 @@
-FROM adoptopenjdk / openjdk11: alpine 
-RUN addgroup -S spring && adduser -S spring -G spring 
-USER spring: spring 
-VOLUME / tmp 
-ARG JAR_FILE 
-ADD $ {JAR_FILE} /app/app.jar 
-EXPOSE 8080 
-ENTRYPOINT ["java", "- Djava .security.egd = fichier: / dev /./ urandom "," - jar "," / app / app.jar "]
+FROM java:8
+VOLUME /tmp
+ADD experim-0.0.1-SNAPSHOT.jar app.jar
+RUN bash -c 'touch /app.jar'
+ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]
+
+
