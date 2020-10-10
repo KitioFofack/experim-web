@@ -11,7 +11,7 @@
 	<groupId>ca.aretex.irex</groupId>
 	<artifactId>experim</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 	<name>experim</name>
 	<description>Experim Portal</description>
 
