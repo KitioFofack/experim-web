@@ -54,10 +54,10 @@ $(document).ready(
                                 },
                                 "data": JSON.stringify(
                                     {
-                                        "nom_entreprise": tab_input[0].value,
-                                        "nom_du_contact": tab_input[1].value,
-                                        "email" : tab_input[2].value,
-                                        "numero_de_telephone": tab_input[3].value
+                                        "compagny_name": tab_input[0].value,
+                                        "lead_name": tab_input[1].value,
+                                        "email_id" : tab_input[2].value,
+                                        "phone": tab_input[3].value
                                     }
                                 ),
                             };
