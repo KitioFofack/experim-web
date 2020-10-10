@@ -33,8 +33,8 @@ function submit(event) {
                     "data": JSON.stringify(
                         {
                            "nom": inputs[0].value,
-                           "courriel": inputs[1].value,
-                           "telephone": inputs[2].value,
+                           "email": inputs[1].value,
+                           "phone": inputs[2].value,
                            "disponibilite": inputs[3].value
                         }
                     ),
