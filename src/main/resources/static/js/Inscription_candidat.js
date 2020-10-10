@@ -38,7 +38,7 @@ function submit() {
 	if (tour == 5) {
 
         var settings = {
-            "url": "http://localhost:8080/submitCandidate",
+            "url": getUrlValue()+"/submitCandidate",
             "method": "POST",
             "timeout": 0,
             "headers": {
@@ -46,10 +46,10 @@ function submit() {
             },
             "data": JSON.stringify(
                 {
-                    "nom":inputs[0].value,
-                    "courriel":inputs[1].value,
-                    "telephone": inputs[2].value,
-                    "disponibilite": inputs[2].value
+                    "lead_name":inputs[0].value,
+                    "email_id":inputs[1].value,
+                    "phone": inputs[2].value,
+                    "password": inputs[3].value
                 }
             ),
         };

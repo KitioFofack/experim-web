@@ -30,7 +30,7 @@ function submit() {
 		    }
 		    else {
 		        var settings = {
-                    "url": "http://localhost:8080/submitPartner",
+                    "url": getUrlValue()+"/submitPartner",
                     "method": "POST",
                     "timeout": 0,
                     "headers": {

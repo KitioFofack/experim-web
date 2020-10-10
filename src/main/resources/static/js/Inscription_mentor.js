@@ -24,7 +24,7 @@ function submit(event) {
 	if (tour == 4) {
 
 		  var settings = {
-                    "url": "http://localhost:8080/submitMentor",
+                    "url": getUrlValue()+"/submitMentor",
                     "method": "POST",
                     "timeout": 0,
                     "headers": {
