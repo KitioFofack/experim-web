@@ -45,19 +45,8 @@ $(document).ready(
 				}
 				else
 				{
-					//convert data to JSON format
-					var data = {
-						enterprise_name : tab_input[0].value,
-						contact_name : tab_input[1].value,
-						email : tab_input[2].value,
-						phone_number : tab_input[3].value
-					};
-					
-					data = JSON.stringify(data);
-					console.log(data);
-
 					var settings = {
-                                "url": "http://localhost:8080/submitEmployeurs",
+                                "url": getUrlValue()+"/submitEmployeurs",
                                 "method": "POST",
                                 "timeout": 0,
                                 "headers": {
