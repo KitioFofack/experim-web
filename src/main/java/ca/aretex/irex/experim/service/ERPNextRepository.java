@@ -41,7 +41,7 @@ public class ERPNextRepository {
         logger.info ("About to save {}", clt);
         try {
             if (client == null) {
-                logger.info("Client eunexistant, we have to instanciate one");
+                logger.info("Client unexistant, we have to instanciate one");
                 openConnexion();
             }
             MediaType mediaType = MediaType.parse("application/json");
