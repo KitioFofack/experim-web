@@ -1,4 +1,4 @@
-FROM java:8
+FROM openjdk:11
 VOLUME /tmp
 ADD target/experim-0.0.1-SNAPSHOT.jar app.jar
 RUN bash -c 'touch /app.jar'
