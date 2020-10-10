@@ -40,3 +40,26 @@ function modalClose() {
     }
     document.body.removeChild(modalContainer);
 }
+
+
+
+function getUrlValue()
+{
+    //load json file
+    var jsonData = (function () {
+        var json = null;
+        $.ajax({
+            'async': false,
+            'global': false,
+            'url': "js/config.json",
+            'dataType': "json",
+            'success': function (data) {
+                jsonData = data;
+            }
+        });
+        return jsonData;
+    })()
+
+    return jsonData['config'][0].urlValue;
+}
+
