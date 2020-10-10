@@ -37,9 +37,9 @@ public class SubmitController {
         return ResponseEntity.status(backendService.save(partner)).build();
     }
 
-    @PostMapping("/submitMentor")
+   /* @PostMapping("/submitMentor")
     public ResponseEntity submitMentor(@RequestBody Mentor mentor)
     {
         return ResponseEntity.status(backendService.save(mentor)).build();
-    }
+    }*/
 }
