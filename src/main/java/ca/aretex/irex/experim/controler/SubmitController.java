@@ -27,7 +27,7 @@ public class SubmitController {
         return ResponseEntity.status(backendService.save(candidate)).build();
     }
 
-    @PostMapping("/submitEmployeurs")
+    @PostMapping("/submitEmployeur")
     public ResponseEntity submitEmployeurs(@RequestBody Employeur employeur){
         return ResponseEntity.status(backendService.save(employeur)).build();
     }

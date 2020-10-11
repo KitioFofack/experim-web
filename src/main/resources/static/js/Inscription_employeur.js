@@ -4,9 +4,7 @@
 	My Own Code
 */
 
-function pageRedirect() {
-	window.location.replace("Confirmation_d_inscription.html");
-}
+
 
 
 $(document).ready(
@@ -37,7 +35,6 @@ $(document).ready(
 				}
 			}
 
-
 			// redirect if it has no problem
 			if (count_err == 0) {
 				if (!regex.test(tab_input[2].value)) {
@@ -45,8 +42,9 @@ $(document).ready(
 				}
 				else
 				{
-					var settings = {
-                                "url": getUrlValue()+"/submitEmployeurs",
+				    var url=config.urlValue+"/submitEmployeur";
+					 var settings = {
+                                "url": url,
                                 "method": "POST",
                                 "timeout": 0,
                                 "headers": {
@@ -54,10 +52,10 @@ $(document).ready(
                                 },
                                 "data": JSON.stringify(
                                     {
-                                        "nom_entreprise": tab_input[0].value,
-                                        "nom_du_contact": tab_input[1].value,
+                                        "nomEntreprise": tab_input[0].value,
+                                        "nomDuContact": tab_input[1].value,
                                         "email" : tab_input[2].value,
-                                        "numero_de_telephone": tab_input[3].value
+                                        "phone": tab_input[3].value
                                     }
                                 ),
                             };
@@ -65,9 +63,7 @@ $(document).ready(
                         $.ajax(settings).done(function (response) {
                           console.log(response);
                         });
-
-
-					//pageRedirect();
+					pageRedirect();
 				}
 			}
 
