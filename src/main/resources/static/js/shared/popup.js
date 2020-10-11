@@ -1,4 +1,7 @@
 
+config={
+    "urlValue" : "http://localhost:8080"
+}
 
 var modalContainer = document.createElement('div');
     modalContainer.setAttribute('id', 'modal'); 
