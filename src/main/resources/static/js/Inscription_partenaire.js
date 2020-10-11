@@ -25,7 +25,7 @@ function submit() {
 		}
 		else if (i == 3){
 
-		        var url = config.urlValue+"/submitPartner";
+		        var url = location.origin+"/submitPartner";
 		        var settings = {
                     "url": url,
                     "method": "POST",

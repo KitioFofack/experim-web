@@ -1,11 +1,7 @@
 
-config={
-    "urlValue" : "http://localhost:8080"
-}
 
 var modalContainer = document.createElement('div');
     modalContainer.setAttribute('id', 'modal'); 
-
 
 
 function modalShow(message) {
@@ -15,7 +11,6 @@ function modalShow(message) {
 
     customBox.innerHTML = '<p>'+message+'</p>';
     customBox.innerHTML += '<button id="modal-close">OK</button>';
-
 
     modalContainer.appendChild(customBox);
     document.body.appendChild(modalContainer);

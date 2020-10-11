@@ -22,7 +22,7 @@ function submit(event) {
 	}
 
 	if (tour == 4) {
-          var url = config.urlValue+"/submitMentor";
+          var url = location.origin+"/submitMentor";
 		  var settings = {
                     "url": url,
                     "method": "POST",

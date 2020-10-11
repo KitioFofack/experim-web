@@ -42,7 +42,7 @@ $(document).ready(
 				}
 				else
 				{
-				    var url=config.urlValue+"/submitEmployeur";
+				    var url=location.origin+"/submitEmployeur";
 					 var settings = {
                                 "url": url,
                                 "method": "POST",
