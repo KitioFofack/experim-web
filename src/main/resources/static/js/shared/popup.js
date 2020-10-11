@@ -63,3 +63,6 @@ function getUrlValue()
     return jsonData['config'][0].urlValue;
 }
 
+function pageRedirect() {
+	window.location.replace("Confirmation_d_inscription.html");
+}
