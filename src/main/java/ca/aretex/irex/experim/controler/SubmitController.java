@@ -18,28 +18,29 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class SubmitController {
 
-    private static Logger logger= LoggerFactory.getLogger(SubmitController.class);
-
     @Autowired
     private ERPNextRepository backendService;
     @PostMapping("/submitCandidate")
     public ResponseEntity submitCandidate(@RequestBody Candidate candidate){
+        log.info("Processing request to save a new Candidate");
         return ResponseEntity.status(backendService.save(candidate)).build();
     }
 
     @PostMapping("/submitEmployeur")
     public ResponseEntity submitEmployeur(@RequestBody Employeur employeur){
+        log.info("Processing request to save a new Employer");
         return ResponseEntity.status(backendService.save(employeur)).build();
     }
 
     @PostMapping("/submitPartner")
     public ResponseEntity submitPartner(@RequestBody Partner partner) {
+        log.info("Processing request to save a new partner");
         return ResponseEntity.status(backendService.save(partner)).build();
     }
 
     @PostMapping("/submitMentor")
-    public ResponseEntity submitMentor(@RequestBody Mentor mentor)
-    {
+    public ResponseEntity submitMentor(@RequestBody Mentor mentor) {
+        log.info("Processing request to save a new Mentor");
         return ResponseEntity.status(backendService.save(mentor)).build();
     }
 }
