@@ -1,6 +1,6 @@
 
 config={
-    "urlValue" : "https://wp-dev.irex.aretex.ca:8080"
+    "urlValue" : "http://localhost:8080"
 }
 
 var modalContainer = document.createElement('div');

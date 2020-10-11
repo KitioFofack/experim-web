@@ -21,8 +21,6 @@ import java.util.stream.Collectors;
 @Repository
 public class ERPNextRepository {
 
-    private static Logger logger = LoggerFactory.getLogger(ERPNextRepository.class);
-
     private static OkHttpClient client;
 
     @Value("${erpnextServerURL}")
@@ -37,10 +35,10 @@ public class ERPNextRepository {
     List<Cookie> cookieList;
     public HttpStatus save(Client clt) {
         Response response;
-        logger.info ("About to save {}", clt);
+        log.info ("About to save {}", clt);
         try {
             if (client == null) {
-                logger.info("Client eunexistant, we have to instanciate one");
+                log.info("Client eunexistant, we have to instanciate one");
                 openConnexion();
             }
             MediaType mediaType = MediaType.parse("application/json");
@@ -49,7 +47,7 @@ public class ERPNextRepository {
 
             String url = new StringBuilder().append(erpnextServerURL).append("/api/resource/Lead").toString();
 
-            logger.info("Request url: {}",url);
+            log.info("Request url: {}",url);
 
             Request request = new Request.Builder()
                     .url(url)
@@ -60,13 +58,13 @@ public class ERPNextRepository {
                             .map(c -> c.toString())
                             .collect(Collectors.joining(";")))
                     .build();
-            logger.info("Data request using cookie string  : {}", cookieList.stream()
+            log.info("Data request using cookie string  : {}", cookieList.stream()
                     .map(c -> c.toString())
                     .collect(Collectors.joining(";")));
-            logger.info("request to be sent {}", request);
+            log.info("request to be sent {}", request);
 //            logger.info("sending request with following parameter token: {} , remote service Endpoint: {}, ", token, erpnextServerURL);
             response = client.newCall(request).execute();
-            logger.info("Request successfull, here is the response:  {}", response);
+            log.info("Request successfull, here is the response:  {}", response);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -85,21 +83,21 @@ public class ERPNextRepository {
 
         String url = new StringBuilder().append(erpnextServerURL).append("/api/method/login").toString();
 
-        logger.info("Sending request for connection opening with following parameters");
-        logger.info("URL String : {}",url);
-        logger.info("Body Sring : {}",bodyString);
+        log.info("Sending request for connection opening with following parameters");
+        log.info("URL String : {}",url);
+        log.info("Body Sring : {}",bodyString);
         okhttp3.Request request = new Request.Builder()
                 .url(url)
                 .method("POST", body)
                 .addHeader("Content-Type", "application/json")
                 .build();
-        logger.info("request to be sent for authentication {}", request);
+        log.info("request to be sent for authentication {}", request);
         Response response = client.newCall(request).execute();
-        logger.info("Response returned : {}", response);
+        log.info("Response returned : {}", response);
         Headers headers= response.headers();
-        logger.info("headers received {}", headers);
+        log.info("headers received {}", headers);
         List<Cookie> cookies = Cookie.parseAll(HttpUrl.parse(erpnextServerURL), headers);
-        logger.info("Cookies received {}", cookies);
+        log.info("Cookies received {}", cookies);
         cookieList=cookies;
     }
 }
