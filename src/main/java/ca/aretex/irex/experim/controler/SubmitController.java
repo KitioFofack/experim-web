@@ -22,13 +22,13 @@ public class SubmitController {
 
     @Autowired
     private ERPNextRepository backendService;
-   @PostMapping("/submitCandidate")
+    @PostMapping("/submitCandidate")
     public ResponseEntity submitCandidate(@RequestBody Candidate candidate){
         return ResponseEntity.status(backendService.save(candidate)).build();
     }
 
     @PostMapping("/submitEmployeur")
-    public ResponseEntity submitEmployeurs(@RequestBody Employeur employeur){
+    public ResponseEntity submitEmployeur(@RequestBody Employeur employeur){
         return ResponseEntity.status(backendService.save(employeur)).build();
     }
 

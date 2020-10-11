@@ -34,7 +34,6 @@ public class ERPNextRepository {
     @Value("${erpNextAccountPassword}")
     private String erpNextAccountPassword;
 
-
     List<Cookie> cookieList;
     public HttpStatus save(Client clt) {
         Response response;
@@ -75,8 +74,11 @@ public class ERPNextRepository {
     }
 
     private void openConnexion() throws IOException {
+
         client = new OkHttpClient().newBuilder().build();
+
         okhttp3.MediaType mediaType = MediaType.parse("application/json");
+
         String bodyString = "{\"usr\":\"kfofack@irex.aretex.ca\",\"pwd\":\"vtgn3fdh\"}";
 
         okhttp3.RequestBody body = RequestBody.create( "" + bodyString, mediaType);
