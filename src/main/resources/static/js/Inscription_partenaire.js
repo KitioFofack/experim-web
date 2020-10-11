@@ -24,13 +24,10 @@ function submit() {
 			break;
 		}
 		else if (i == 3){
-		    if (!regex_num.test(inputs[i].value)) {
-		        modalShow("Le numéro de téléphone est invalide");
-		        break;
-		    }
-		    else {
+
+		        var url = config.urlValue+"/submitPartner";
 		        var settings = {
-                    "url": "http://localhost:8080/submitPartner",
+                    "url": url,
                     "method": "POST",
                     "timeout": 0,
                     "headers": {
@@ -38,9 +35,9 @@ function submit() {
                     },
                     "data": JSON.stringify(
                         {
-                            "company_name":inputs[0].value,
-                            "lead_name": inputs[1].value,
-                            "email_id": inputs[2].value,
+                            "companyName":inputs[0].value,
+                            "leadName": inputs[1].value,
+                            "email": inputs[2].value,
                             "phone": inputs[3].value
                         }
                     ),
@@ -49,9 +46,10 @@ function submit() {
                 $.ajax(settings).done(function (response) {
                   console.log(response);
                 });
+                pageRedirect();
 		    }
-		}
 	}
+
 
 }
 
