@@ -30,9 +30,9 @@
             </encoder>
         </appender>
 
-        <logger name="org.springframework" level="INFO"/>
+        <logger name="org.springframework" level="DEBUG"/>
         <logger name="ca.aretex.ca" level="DEBUG"/>
-        <root level="ERROR">
+        <root level="DEBUG">
             <appender-ref ref="FILE-ROLLING"/>
         </root>
     </springProfile>
