@@ -67,10 +67,10 @@ public class ERPNextRepository {
 
             HttpEntity<String> entity = new HttpEntity<>(""+clt, httpHeaders);
 
-            /*logger.info("Data request using cookie string  : {}", cookieList.stream()
+            logger.info("Data request using cookie string  : {}", cookieList.stream()
                     .map(c -> c.toString())
                     .collect(Collectors.joining(";")));
-            logger.info("request to be sent {}", entity);*/
+            logger.info("request to be sent {}", entity);
 
 
             ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.POST, entity, String.class);
@@ -106,9 +106,9 @@ public class ERPNextRepository {
         HttpHeaders headers = response.getHeaders();
         //Headers headers1 = response.headers();
         logger.info("headers received {}", headers);
-        //List<Cookie> cookies = Collections.singletonList(Cookie.parse(HttpUrl.parse(erpnextServerURL), headers.toString()));
-        //List<Cookie> cookies = Collections.singletonList(Cookie.parse(HttpUrl.parse(erpnextServerURL), headers.toString()));
-        //logger.info("Cookies received {}", cookies);
-        //cookieList = cookies;
+       // List<Cookie> cookies = Cookie.parseAll(HttpUrl.parse(erpnextServerURL), headers.);
+        List<Cookie> cookies = Collections.singletonList(Cookie.parse(HttpUrl.parse(erpnextServerURL), headers.toString()));
+        logger.info("Cookies received {}", cookies);
+        cookieList = cookies;
     }
 }
