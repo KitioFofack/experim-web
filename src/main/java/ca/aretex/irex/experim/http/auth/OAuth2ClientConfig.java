@@ -3,6 +3,7 @@ package ca.aretex.irex.experim.http.auth;
 import com.typesafe.config.Config;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.ToString;
 import org.springframework.security.oauth2.client.OAuth2RestTemplate;
 import org.springframework.security.oauth2.client.resource.OAuth2ProtectedResourceDetails;
@@ -17,6 +18,7 @@ import java.util.List;
 @ToString
 @Builder
 @AllArgsConstructor
+@Getter
 public class OAuth2ClientConfig {
     private final String clientId;
     private final String clientSecret;
