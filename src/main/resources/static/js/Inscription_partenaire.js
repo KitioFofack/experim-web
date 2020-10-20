@@ -50,9 +50,9 @@ function submit() {
                     },
                     "data": JSON.stringify(
                         {
-                            "company_name":inputs[0].value.trim(),
-                            "lead_name": inputs[1].value.trim(),
-                            "email_id": inputs[2].value.trim(),
+                            "companyName":inputs[0].value.trim(),
+                            "leadName": inputs[1].value.trim(),
+                            "email": inputs[2].value.trim(),
                             "phone": inputs[3].value.toString().trim()
                         }
                     ),
