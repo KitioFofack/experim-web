@@ -10,6 +10,7 @@ function submit() {
 	cpw = document.getElementById("cpw").value;
 	inputs = document.getElementsByTagName("input");
 	var regex = /^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$/;
+	var regex_num = /^[\(]?[\+]?[0-9]{3}[\)]?[ ]{1}[0-9]{3}[-]{1}[0-9]{4}$/;
 	var tour = 0;
 
 	for (let i = 0; i < inputs.length; i++) {
@@ -17,6 +18,7 @@ function submit() {
 			name = inputs[i].name;
 			name = name.replace('_', ' ');
 			name = name.replace('_', ' ');
+
 			modalShow("Veuillesz entrer le champs "+ name);
 			break;
 		}
@@ -24,6 +26,16 @@ function submit() {
 			modalShow("Le champs couriel n'est pas valide !");
 			break;
 		}
+
+		if (i == 2 && !regex_num.test(inputs[i].value)){
+        	modalShow("Le champs Telephone n'est pas valide !");
+        	break;
+        }
+
+        if (i == 3 && inputs[i].value.length < 6){
+            modalShow("Le mot de passe doit contenir au moins 6 caracteres");
+            break;
+        }
 
 		if (i == 4 && inputs[i].value != inputs[i-1].value) {
 			var erreur = "Les mots de passe ne sont pas identiques !"
