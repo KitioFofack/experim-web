@@ -12,10 +12,19 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Client {
-    private String name;
-    private String email;
-    private String phone;
+    String name;
+    String email;
+    String phone;
 
+
+    @JsonProperty("name")
+    public void setName(String name){
+        this.name = name;
+    }
+    @JsonProperty("email")
+    public void setEmail(String email){
+        this.email = email;
+    }
 
     @JsonProperty("lead_name")
     public String getName(){

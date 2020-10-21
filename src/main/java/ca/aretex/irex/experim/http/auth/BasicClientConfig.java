@@ -7,6 +7,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpHost;
 import org.springframework.http.client.support.BasicAuthorizationInterceptor;
 import org.springframework.web.client.RestTemplate;
@@ -48,7 +49,7 @@ public class BasicClientConfig {
     }
 
     public HttpHost getHttpHost(){
-        String[] fields = tokenUrl.toLowerCase().split(":", 3);
+        String[] fields = StringUtils.splitByWholeSeparatorPreserveAllTokens(tokenUrl.toLowerCase(), ":", 3);
 
         String scheme = fields[0];
         int defaultPort;
@@ -67,7 +68,7 @@ public class BasicClientConfig {
         String hostname = fields[1].replaceFirst("//", "").split("/")[0];
 
         int port = defaultPort;
-        if(fields[2] != null  && !fields[2].isEmpty()){
+        if(fields.length > 2 && fields[2] != null  && !fields[2].isEmpty()){
             try{
                 port = Integer.parseInt(fields[2].split("/")[0]);
             } catch (Exception ex){
