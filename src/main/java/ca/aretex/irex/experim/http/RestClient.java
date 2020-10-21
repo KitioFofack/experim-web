@@ -15,7 +15,7 @@ import java.util.function.Function;
 
 @Slf4j
 @RequiredArgsConstructor
-public class OAuthClient<T, R> implements Function<T, Optional<R>> {
+public class RestClient<T, R> implements Function<T, Optional<R>> {
     protected final transient ObjectMapper objectMapper = new ObjectMapper();
     protected final String serverBaseUrl;
     protected final RestTemplate restTemplate;
@@ -35,8 +35,9 @@ public class OAuthClient<T, R> implements Function<T, Optional<R>> {
     private Optional<R> getResponse(RestTemplate restTemplate, T requestObject){
         try {
             String requestJson = objectToJson(requestObject);
-            log.info("seding requestJson={}", requestJson);
+            log.info("sending requestJson={}", requestJson);
             R response = restTemplate.postForObject(serverBaseUrl, jsonToEntity(requestJson), responseClassTag);
+            log.info("receiving response={}", response);
             return response == null ? Optional.empty() : Optional.of(response);
         } catch (Exception exception){
             log.error("could not get response from requestObject={} due to", requestObject, exception);
