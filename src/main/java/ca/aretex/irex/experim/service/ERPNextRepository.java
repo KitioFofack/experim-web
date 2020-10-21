@@ -2,26 +2,17 @@ package ca.aretex.irex.experim.service;
 
 import ca.aretex.irex.experim.bean.Client;
 import lombok.extern.slf4j.Slf4j;
-//import okhttp3.*;
-//import okhttp3.MediaType;
-import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.web.servlet.server.Session;
 import org.springframework.http.*;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.client.RestTemplate;
 
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.net.CookieManager;
-import java.net.CookiePolicy;
 import java.net.http.HttpClient;
-import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -31,7 +22,6 @@ public class ERPNextRepository {
     private static Logger logger = LoggerFactory.getLogger(ERPNextRepository.class);
 
     private static HttpClient client;
-    //private static CloseableHttpClient httpClient;
 
     @Value("${erpnextServerURL}")
     private String erpnextServerURL;
