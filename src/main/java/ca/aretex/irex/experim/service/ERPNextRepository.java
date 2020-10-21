@@ -19,8 +19,6 @@ import java.util.stream.Collectors;
 @Repository
 public class ERPNextRepository {
 
-    private static Logger logger = LoggerFactory.getLogger(ERPNextRepository.class);
-
     private static HttpClient client;
 
     @Value("${erpnextServerURL}")
@@ -36,14 +34,14 @@ public class ERPNextRepository {
     List<String> cookieList;
     public HttpStatus save(Client clt) {
         //Response response;
-        logger.info ("About to save {}", clt);
+        log.info ("About to save {}", clt);
         try {
             if (client == null) {
-                logger.info("Client unexistant, we have to instanciate one");
+                log.info("Client unexistant, we have to instanciate one");
                 openConnexion();
             }
             String url = new StringBuilder().append(erpnextServerURL).append("/api/resource/Lead").toString();
-            logger.info("Request url: {}",url);
+            log.info("Request url: {}",url);
             RestTemplate restTemplate = new RestTemplate();
             HttpHeaders httpHeaders = new HttpHeaders();
 
@@ -54,12 +52,12 @@ public class ERPNextRepository {
 
             HttpEntity<String> entity = new HttpEntity<>(""+clt, httpHeaders);
 
-            logger.info("Data request using cookie string  : {}", cookieList.stream()
+            log.info("Data request using cookie string  : {}", cookieList.stream()
                     .map(c -> c.toString())
                     .collect(Collectors.joining(";")));
-            logger.info("request to be sent {}", entity);
+            log.info("request to be sent {}", entity);
             ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.POST, entity, String.class);
-            logger.info("Request successfull, here is the response:  {}", response);
+            log.info("Request successfull, here is the response:  {}", response);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -78,13 +76,13 @@ public class ERPNextRepository {
         HttpEntity<String> entity = new HttpEntity<>("" + bodyString, httpHeaders);
         ResponseEntity<byte[]> response = restTemplate.exchange(url, HttpMethod.POST, entity, byte[].class);
 
-        logger.info("Sending request for connection opening with following parameters");
-        logger.info("URL String : {}",url);
-        logger.info("Body Sring : {}",bodyString);
-        logger.info("Response returned : {}", response);
+        log.info("Sending request for connection opening with following parameters");
+        log.info("URL String : {}",url);
+        log.info("Body Sring : {}",bodyString);
+        log.info("Response returned : {}", response);
         HttpHeaders headers = response.getHeaders();
-        logger.info("headers received {}", headers);
-        logger.info("Cookies received {}", headers.get(HttpHeaders.SET_COOKIE));
+        log.info("headers received {}", headers);
+        log.info("Cookies received {}", headers.get(HttpHeaders.SET_COOKIE));
         cookieList = headers.getValuesAsList(HttpHeaders.SET_COOKIE);
     }
 }
