@@ -1,37 +1,32 @@
-package ca.aretex.irex.experim.bean.request;
+package ca.aretex.irex.experim.bean.request.data;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonUnwrapped;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Client {
     String name;
-    String email;
-    String phone;
 
+    @JsonUnwrapped
+    Contact contact;
 
-    @JsonProperty("name")
+    @JsonProperty("name") @JsonAlias("lead_name")
     public void setName(String name){
         this.name = name;
-    }
-    @JsonProperty("email")
-    public void setEmail(String email){
-        this.email = email;
     }
 
     @JsonProperty("lead_name")
     public String getName(){
         return name;
-    }
-    @JsonProperty("email_id")
-    public String getEmail(){
-        return email;
     }
 }

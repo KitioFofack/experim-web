@@ -1,6 +1,6 @@
 package ca.aretex.irex.experim.service;
 
-import ca.aretex.irex.experim.bean.request.Client;
+import ca.aretex.irex.experim.bean.request.Prospectable;
 import ca.aretex.irex.experim.http.auth.BasicClientConfig;
 import com.typesafe.config.Config;
 import com.typesafe.config.ConfigFactory;
@@ -20,9 +20,9 @@ public class ERPNextRepository {
     private final Config config = ConfigFactory.load("application.properties");
     private final BasicClientConfig basicClientConfig = new BasicClientConfig(config);
 
-    public HttpStatus save(Client clt) {
+    public HttpStatus save(Prospectable clt) {
         String erpnextServerPostLeadURL = erpnextServerURL + "/api/resource/Lead";
-        ERPNextRestClient<Client> client = new ERPNextRestClient<>(
+        ERPNextRestClient<Prospectable> client = new ERPNextRestClient<>(
                 erpnextServerPostLeadURL,
                 basicClientConfig.getBasicRestTemplate()
         );
