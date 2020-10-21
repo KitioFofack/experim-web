@@ -18,6 +18,7 @@ $(document).ready(
 			//get all champs
 			var tab_input = $(":input");
 			var regex = /^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$/;
+			var regex_num = /^[\+]?(1[ .-]?)?(\([2-9]\d{2}\)[ .-]?|([2-9]\d{2}[ .-]?)){2}\d{4}$/;
 			var count_err = 0;
 
 			for (let index = 0; index < 4; index++) {
@@ -40,6 +41,12 @@ $(document).ready(
 				if (!regex.test(tab_input[2].value)) {
 					modalShow("Le champs "+tab_input[2].name+" n'est pas valide !");
 				}
+				else if(!regex_num.test(tab_input[3].value)){
+                    while(tab_input[3].name.indexOf('_') >= 0) {
+                        tab_input[3].name = tab_input[3].name.replace('_',' ');
+                    }
+                    modalShow("Le champs "+tab_input[3].name+" n'est pas valide !");
+                }
 				else
 				{
 				    var url=location.origin+"/submitEmployeur";
