@@ -1,7 +1,11 @@
 package ca.aretex.irex.experim.service;
 
 import ca.aretex.irex.experim.bean.Client;
+import ca.aretex.irex.experim.http.auth.OAuth2ClientConfig;
+import com.typesafe.config.Config;
+import com.typesafe.config.ConfigFactory;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -26,6 +30,12 @@ public class ERPNextRepository {
 
     @Value("${erpNextAccount}")
     private String erpNextAccount;
+    private final Config config = ConfigFactory.load("application.properties");
+    private final OAuth2ClientConfig oAuth2ClientConfig = new OAuth2ClientConfig(config);
+    private final ERPNextOAuthRestClient<Client> client = new ERPNextOAuthRestClient<>(
+            oAuth2ClientConfig.getTokenUrl(),
+            oAuth2ClientConfig.getOAuth2RestTemplate()
+    );
 
     @Value("${erpNextAccountPassword}")
     private String erpNextAccountPassword;
@@ -84,5 +94,6 @@ public class ERPNextRepository {
         log.info("headers received {}", headers);
         log.info("Cookies received {}", headers.get(HttpHeaders.SET_COOKIE));
         cookieList = headers.getValuesAsList(HttpHeaders.SET_COOKIE);
+        return client.apply(clt).map(str -> HttpStatus.CREATED).orElse(HttpStatus.PRECONDITION_FAILED);
     }
 }

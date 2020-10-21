@@ -9,7 +9,7 @@ public class Employeur extends Client{
 
     @Override
     public String toString() {
-        return String.format("{\"enterprise_name\":\"%s\",\"conctact_name\":\"%s\",\"email\":\"%s\",\"phone_number\":\"%s\"}",
-                this.getNomEntreprise(), this.getNomDuContact(), this.getPhone(), this.getEmail());
+        return String.format("{\"company_name\":\"%s\",\"lead_name\":\"%s\",\"email_id\":\"%s\",\"phone\":\"%s\"}",
+                this.getNomEntreprise(), this.getNomDuContact(), this.getEmail(), this.getPhone());
     }
 }

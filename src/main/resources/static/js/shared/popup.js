@@ -4,7 +4,6 @@ var modalContainer = document.createElement('div');
     modalContainer.setAttribute('id', 'modal'); 
 
 
-
 function modalShow(message) {
 
     var customBox = document.createElement('div');
@@ -12,7 +11,6 @@ function modalShow(message) {
 
     customBox.innerHTML = '<p>'+message+'</p>';
     customBox.innerHTML += '<button id="modal-close">OK</button>';
-
 
     modalContainer.appendChild(customBox);
     document.body.appendChild(modalContainer);
@@ -39,4 +37,30 @@ function modalClose() {
         modalContainer.removeChild(modalContainer.firstChild);
     }
     document.body.removeChild(modalContainer);
+}
+
+
+
+function getUrlValue()
+{
+    //load json file
+    var jsonData = (function () {
+        var json = null;
+        $.ajax({
+            'async': false,
+            'global': false,
+            'url': "js/config.json",
+            'dataType': "json",
+            'success': function (data) {
+                jsonData = data;
+            }
+        });
+        return jsonData;
+    })()
+
+    return jsonData['config'][0].urlValue;
+}
+
+function pageRedirect() {
+	window.location.replace("Confirmation_d_inscription.html");
 }

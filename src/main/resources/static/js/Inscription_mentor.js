@@ -22,9 +22,9 @@ function submit(event) {
 	}
 
 	if (tour == 4) {
-
+          var url = location.origin+"/submitMentor";
 		  var settings = {
-                    "url": "http://localhost:8080/submitMentor",
+                    "url": url,
                     "method": "POST",
                     "timeout": 0,
                     "headers": {
@@ -33,8 +33,8 @@ function submit(event) {
                     "data": JSON.stringify(
                         {
                            "nom": inputs[0].value,
-                           "courriel": inputs[1].value,
-                           "telephone": inputs[2].value,
+                           "email": inputs[1].value,
+                           "phone": inputs[2].value,
                            "disponibilite": inputs[3].value
                         }
                     ),
@@ -44,7 +44,7 @@ function submit(event) {
               console.log(response);
             });
 
-		//window.location.href='./Confirmation_d_inscription.html';
+		pageRedirect();
 
 	}
 
