@@ -68,7 +68,7 @@ public class ERPNextRepository {
 
     private void openConnexion() throws IOException {
         client = HttpClient.newBuilder().build();
-        String bodyString = "{\"usr\":\"kfofack@irex.aretex.ca\",\"pwd\":\"vtgn3fdh\"}";
+        String bodyString = "{\"usr\":\"bngameni@irex.aretex.ca\",\"pwd\":\"Password@1234\"}";
         RestTemplate restTemplate = new RestTemplate();
         HttpHeaders httpHeaders = new HttpHeaders();
 
