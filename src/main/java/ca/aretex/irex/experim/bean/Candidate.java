@@ -10,6 +10,6 @@ public class Candidate extends Client{
 
     @Override
     public String toString() {
-        return String.format("{\"lead_name\":\"%s\",\"email\":\"%s\",\"phone\":\"%s\"}", lead_name, this.getEmail(), this.getPhone());
+        return String.format("{\"lead_name\":\"%s\",\"email_id\":\"%s\",\"phone\":\"%s\"}", lead_name, this.getEmail(), this.getPhone());
     }
 }

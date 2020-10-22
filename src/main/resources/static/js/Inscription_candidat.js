@@ -2,7 +2,9 @@
 
 // My Own code 
 
-
+function pageRedirect() {
+	window.location.replace("Confirmation_d_inscription.html");
+}
 
 
 function submit() {
@@ -46,10 +48,9 @@ function submit() {
             },
             "data": JSON.stringify(
                 {
-                    "nom":inputs[0].value,
-                    "courriel":inputs[1].value,
-                    "telephone": inputs[2].value,
-                    "disponibilite": inputs[2].value
+                    "lead_name":inputs[0].value,
+                    "email":inputs[1].value,
+                    "phone": inputs[2].value,
                 }
             ),
         };
@@ -57,6 +58,8 @@ function submit() {
     $.ajax(settings).done(function (response) {
       console.log(response);
     });
+
+    pageRedirect();
 
 	}
 
