@@ -4,12 +4,12 @@ import lombok.Data;
 
 @Data
 public class Employeur extends Client{
-    private String nomEntreprise;
-    private String nomDuContact;
+    private String companyName;
+    private String leadName;
 
     @Override
     public String toString() {
-        return String.format("{\"enterprise_name\":\"%s\",\"conctact_name\":\"%s\",\"email\":\"%s\",\"phone_number\":\"%s\"}",
-                this.getNomEntreprise(), this.getNomDuContact(), this.getPhone(), this.getEmail());
+        return String.format("{\"company_name\":\"%s\",\"lead_name\":\"%s\",\"email\":\"%s\",\"phone_number\":\"%s\"}",
+                companyName, leadName, this.getEmail(), this.getPhone());
     }
 }
