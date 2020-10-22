@@ -43,6 +43,13 @@ $(document).ready(
 				if (!regex.test(tab_input[2].value)) {
 					modalShow("Le champs "+tab_input[2].name+" n'est pas valide !");
 				}
+
+				else if(!regex_num.test(tab_input[3].value)){
+                    while(tab_input[3].name.indexOf('_') >= 0) {
+                        tab_input[3].name = tab_input[3].name.replace('_',' ');
+                    }
+                    modalShow("Le champs "+tab_input[3].name+" n'est pas valide !");
+                }
 				else
 				{
 					//convert data to JSON format
