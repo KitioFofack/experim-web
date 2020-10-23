@@ -80,7 +80,7 @@ public class ERPNextRepository {
 
         logger.info("Sending request for connection opening with following parameters");
         logger.info("URL String : {}",url);
-        logger.info("Body Sring : {}",bodyString);
+        logger.info("Body String : {}",bodyString);
         logger.info("Response returned : {}", response);
         HttpHeaders headers = response.getHeaders();
         logger.info("headers received {}", headers);
