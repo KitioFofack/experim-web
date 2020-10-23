@@ -41,7 +41,7 @@ function submit() {
 		    }
 		    else {
 
-		        var url = config.urlValue+"/submitPartner";
+		        var url = location.origin+"/submitPartner";
 		        var settings = {
                     "url": url,
                     "method": "POST",

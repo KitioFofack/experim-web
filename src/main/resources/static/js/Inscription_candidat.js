@@ -35,7 +35,7 @@ function submit() {
 	}
 
 	if (tour == 5) {
-        var url =  config.urlValue+"/submitCandidate";
+        var url =  location.origin+"/submitCandidate";
         var settings = {
             "url": url,
             "method": "POST",
