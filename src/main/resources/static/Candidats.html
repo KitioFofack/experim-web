@@ -7,6 +7,7 @@
 <title>Candidats</title>
 <link rel="stylesheet" type="text/css" id="applicationStylesheet" href="css/Candidats.css"/>
 <script id="applicationScript" type="text/javascript" src="js/Candidats.js"></script>
+
 </head>
 <body>
 <div id="Candidats">
@@ -22,7 +23,7 @@
 		<rect id="Rectangle_7" rx="0" ry="0" x="0" y="0" width="1366" height="733.774">
 		</rect>
 	</svg>
-	<div data-type="Group" data-name="Groupe 794" onclick="application.goToTargetView(event)" id="Groupe_794">
+	<div data-type="Group" data-name="Groupe 794" class="experimLogo" id="Groupe_794">
 		<svg data-type="Path" data-name="Tracé 959" class="Trac_959" viewBox="-4755.674 72.289 15.569 15.844">
 			<path id="Trac_959" d="M -4751.1650390625 81.44400024414063 C -4750.9091796875 83.28600311279297 -4749.32080078125 84.41999816894531 -4747.4208984375 84.41999816894531 C -4746.087890625 84.41999816894531 -4744.72705078125 83.71099853515625 -4744.046875 82.60600280761719 L -4740.841796875 84.70400238037109 C -4742.1181640625 86.99900054931641 -4744.27294921875 88.13300323486328 -4747.365234375 88.13300323486328 C -4749.7177734375 88.13300323486328 -4751.6748046875 87.39600372314453 -4753.291015625 85.9219970703125 C -4754.87890625 84.41999816894531 -4755.673828125 82.52100372314453 -4755.673828125 80.19699859619141 C -4755.673828125 78.01399993896484 -4754.87890625 76.1719970703125 -4753.31982421875 74.61299896240234 C -4751.73193359375 73.05400085449219 -4749.83203125 72.28900146484375 -4747.64794921875 72.28900146484375 C -4745.408203125 72.28900146484375 -4743.5927734375 72.99800109863281 -4742.203125 74.38600158691406 C -4740.81396484375 75.77500152587891 -4740.10498046875 77.61799621582031 -4740.10498046875 79.85700225830078 C -4740.10498046875 80.56500244140625 -4740.1328125 81.10399627685547 -4740.162109375 81.44400024414063 L -4751.1650390625 81.44400024414063 Z M -4744.52880859375 78.52500152587891 C -4744.64208984375 77.19200134277344 -4745.748046875 75.88899993896484 -4747.76220703125 75.88899993896484 C -4748.6689453125 75.88899993896484 -4749.43505859375 76.1719970703125 -4750.02978515625 76.76699829101563 C -4750.6259765625 77.33399963378906 -4750.9658203125 77.92900085449219 -4751.05078125 78.52500152587891 L -4744.52880859375 78.52500152587891 Z">
 			</path>
@@ -999,7 +1000,9 @@ Mentors
 Employeurs" id="Candidats_Mentors_Employeurs">
 		<span>Candidats<br/>Mentors<br/>Employeurs</span>
 	</div>
-	<div data-type="Text" data-name="PartenairesÀ proposConnexion" id="Partenaires__propos_Connexion">
+	<div data-type="Text" data-name="Partenaires
+À propos
+Connexion" id="Partenaires__propos_Connexion">
 		<span>Partenaires<br/>À propos<br/></span><span style="font-family:Gilroy;font-style:normal;font-weight:bold;">Connexion</span>
 	</div>
 	<div data-type="Text" data-name="315 Blvd Maisonneuve
@@ -3971,4 +3974,7 @@ Email: info@experim.ca" id="Phone_1_514_296_2735_Email_inf_brd">
 	</div>
 </div>
 </body>
+			<!-- Adding popup.js for control redirection after click on logo -->
+			<script id="applicationScript" type="text/javascript" src="js/shared/popup.js"></script>
+
 </html>
