@@ -75,5 +75,4 @@ experimLogo.addEventListener("click",clickLogo);
 
 function clickLogo() {
 	window.location.replace("index.html");
-	console.log("cool");
 }
