@@ -74,5 +74,5 @@ var experimLogo = document.querySelector(".experimLogo");
 experimLogo.addEventListener("click",clickLogo);
 
 function clickLogo() {
-	window.location.replace("index.html");
+	window.location.replace("/");
 }
