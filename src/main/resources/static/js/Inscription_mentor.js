@@ -6,7 +6,6 @@ function pageRedirect() {
 function submit(event) {
 	inputs = document.getElementsByTagName("input");
 	var regex_mail = /^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$/;
-	var regex_mail = /^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$/;
     var regex_name = /^[a-zA-ZêëïäâéèôÔÊËÏÄÉÈÂ]+[0-9a-zA-ZêëïäâéèôÔÊËÏÄÉÈÂ' -]{0,}$/;
     var regex_num = /^[\+]?(1[ .-]?)?(\([2-9]\d{2}\)[ .-]?|([2-9]\d{2}[ .-]?)){2}\d{4}$/;
     var tour = 0;
@@ -33,8 +32,7 @@ function submit(event) {
             break;
         }
 
-        if (i == 3 && Date.parse(inputs[i].value) < Date.now()) {
-            console.log(Date.parse(inputs[i].value) + " " + Date.now());
+        if (i == 3 && (new Date() >= new Date(inputs[i].value))) {
             modalShow("Date incorrect !");
             break;
         }
