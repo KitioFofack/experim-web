@@ -8,8 +8,10 @@
 
 function submit() {
 	inputs = document.getElementsByTagName("input");
-	var regex = /^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$/;
-	var regex_num = /^0{2}|\+?(1[.-])?(\(\d{3}\)[.-]|(\d{3}[.-]?)){2}\d{4}$/;
+	var regex_mail = /^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$/;
+	var regex_contact_name = /^[a-zA-ZêëïäâéèôÔÊËÏÄÉÈÂ]+[0-9a-zA-ZêëïäâéèôÔÊËÏÄÉÈÂ' -]{0,}$/;
+	var regex_company_name = /^[0-9a-zA-ZêëïäâéèôÔÊËÏÄÉÈÂ]+[.0-9a-zA-ZêëïäâéèôÔÊËÏÄÉÈÂ' -]{1,}$/;
+	var regex_num = /^[\+]?(1[ .-]?)?(\([2-9]\d{2}\)[ .-]?|([2-9]\d{2}[ .-]?)){2}\d{4}$/;
 
 	for (let i = 0; i < inputs.length; i++) {
 		if (inputs[i].value == "") {
@@ -19,11 +21,26 @@ function submit() {
 			modalShow("Veuillez entrer le "+ name);
 			break;
 		}
-		if (i == 2 && !regex.test(inputs[i].value)){
+
+		if (i == 0 && !regex_company_name.test(inputs[i].value.trim())) {
+		    modalShow("Nom de l'entreprise invalide");
+		    break;
+		}
+
+		if (i == 1 && !regex_contact_name.test(inputs[i].value.trim())) {
+            modalShow("Nom du contact invalide");
+            break;
+        }
+		if (i == 2 && !regex_mail.test(inputs[i].value.toString().trim())){
 			modalShow("Le courriel n'est pas valide ! ");
 			break;
 		}
 		else if (i == 3){
+		    if (!regex_num.test(inputs[i].value.toString().trim())) {
+		        modalShow("Le numéro de téléphone est invalide");
+		        break;
+		    }
+		    else {
 
 		        var url = config.urlValue+"/submitPartner";
 		        var settings = {
@@ -35,10 +52,10 @@ function submit() {
                     },
                     "data": JSON.stringify(
                         {
-                            "companyName":inputs[0].value,
-                            "leadName": inputs[1].value,
-                            "email": inputs[2].value,
-                            "phone": inputs[3].value
+                            "companyName":inputs[0].value.trim(),
+                            "leadName": inputs[1].value.trim(),
+                            "email": inputs[2].value.trim(),
+                            "phone": inputs[3].value.toString().trim()
                         }
                     ),
                 };

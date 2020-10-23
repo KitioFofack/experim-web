@@ -41,6 +41,7 @@ public class SubmitController {
     @PostMapping("/submitMentor")
     public ResponseEntity submitMentor(@RequestBody Mentor mentor) {
         log.info("Processing request to save a new Mentor");
+
         return ResponseEntity.status(backendService.save(mentor)).build();
     }
 }
