@@ -16,7 +16,7 @@ function submit(event) {
 			name = inputs[i].name;
 			name = name.replace('_', ' ');
 			name = name.replace('_', ' ');
-			modalShow("Veuillez entrer le champs "+ name);
+			modalShow("Veuillez entrer le champ "+ name);
 			break;
 		}
 
