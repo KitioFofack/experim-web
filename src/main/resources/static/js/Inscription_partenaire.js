@@ -40,8 +40,10 @@ function submit() {
 		        break;
 		    }
 		    else {
+
+		        var url = location.origin+"/submitPartner";
 		        var settings = {
-                    "url": "http://localhost:8080/submitPartner",
+                    "url": url,
                     "method": "POST",
                     "timeout": 0,
                     "headers": {

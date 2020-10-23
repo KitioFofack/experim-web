@@ -35,12 +35,11 @@ function submit() {
 
 		tour+=1;
 	}
-	
 
 	if (tour == 5) {
-
+        var url =  location.origin+"/submitCandidate";
         var settings = {
-            "url": "http://localhost:8080/submitCandidate",
+            "url": url,
             "method": "POST",
             "timeout": 0,
             "headers": {
@@ -48,7 +47,7 @@ function submit() {
             },
             "data": JSON.stringify(
                 {
-                    "lead_name":inputs[0].value,
+                    "nom":inputs[0].value,
                     "email":inputs[1].value,
                     "phone": inputs[2].value,
                 }
@@ -58,8 +57,6 @@ function submit() {
     $.ajax(settings).done(function (response) {
       console.log(response);
     });
-
-    pageRedirect();
 
 	}
 

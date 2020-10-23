@@ -4,6 +4,7 @@ function pageRedirect() {
 
 
 function submit(event) {
+
 	inputs = document.getElementsByTagName("input");
 	var regex_mail = /^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$/;
 	var regex_mail = /^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$/;
@@ -40,13 +41,13 @@ function submit(event) {
         }
 
 		tour+=1;
-
+		
 	}
 
 	if (tour == 4) {
-
+          var url = location.origin+"/submitMentor";
 		  var settings = {
-                    "url": "http://localhost:8080/submitMentor",
+                    "url": url,
                     "method": "POST",
                     "timeout": 0,
                     "headers": {
@@ -71,7 +72,6 @@ function submit(event) {
 	}
 
 }
-
 
 
 

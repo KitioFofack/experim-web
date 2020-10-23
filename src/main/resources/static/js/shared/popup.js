@@ -1,4 +1,7 @@
 
+config={
+    "urlValue" : "http://localhost:8080"
+}
 
 var modalContainer = document.createElement('div');
     modalContainer.setAttribute('id', 'modal'); 
@@ -39,4 +42,38 @@ function modalClose() {
         modalContainer.removeChild(modalContainer.firstChild);
     }
     document.body.removeChild(modalContainer);
+}
+
+
+
+function getUrlValue()
+{
+    //load json file
+    var jsonData = (function () {
+        var json = null;
+        $.ajax({
+            'async': false,
+            'global': false,
+            'url': "js/config.json",
+            'dataType': "json",
+            'success': function (data) {
+                jsonData = data;
+            }
+        });
+        return jsonData;
+    })()
+
+    return jsonData['config'][0].urlValue;
+}
+
+function pageRedirect() {
+	window.location.replace("Confirmation_d_inscription.html");
+}
+
+var experimLogo = document.querySelector(".experimLogo");
+experimLogo.addEventListener("click",clickLogo);
+
+function clickLogo() {
+	window.location.replace("index.html");
+	console.log("cool");
 }
