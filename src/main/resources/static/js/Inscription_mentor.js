@@ -9,6 +9,9 @@ function submit(event) {
 	var regex_mail = /^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$/;
     var regex_name = /^[a-zA-ZêëïäâéèôÔÊËÏÄÉÈÂ]+[0-9a-zA-ZêëïäâéèôÔÊËÏÄÉÈÂ' -]{0,}$/;
     var regex_num = /^[\+]?(1[ .-]?)?(\([2-9]\d{2}\)[ .-]?|([2-9]\d{2}[ .-]?)){2}\d{4}$/;
+    var date = new Date();
+    console.log(date);
+    date.get
     var tour = 0;
 
 	for (let i = 0; i < inputs.length; i++) {
@@ -30,6 +33,12 @@ function submit(event) {
         }
         if (i == 2 && !regex_num.test(inputs[i].value.toString().trim())){
             modalShow("Le numéro de téléphone est invalide");
+            break;
+        }
+
+        if (i == 3 && Date.parse(inputs[i].value) < Date.now()) {
+            console.log(Date.parse(inputs[i].value) + " " + Date.now());
+            modalShow("Date incorrect !");
             break;
         }
 
@@ -60,7 +69,7 @@ function submit(event) {
               console.log(response);
             });
 
-		pageRedirect();
+		//pageRedirect();
 
 	}
 
