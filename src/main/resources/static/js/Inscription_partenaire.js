@@ -3,7 +3,6 @@
  function Redirect() {
                window.location = "Confirmation_d_inscription.html";
             }
-            //document.write("You will be redirected to main page in 10 sec.");
 
 
 function submit() {
@@ -63,13 +62,11 @@ function submit() {
                 $.ajax(settings).done(function (response) {
                   console.log(response);
                 });
-                pageRedirect();
+               pageRedirect();
 		    }
-	}
-
-
+	    }
+    }
 }
-
 
 
 // My Own code 
