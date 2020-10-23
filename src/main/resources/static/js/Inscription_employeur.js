@@ -19,7 +19,8 @@ $(document).ready(
 			
 			//get all champs
 			var tab_input = $(":input");
-			var regex = /^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$/;
+			var regex = /^[a-zA-Z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$/;
+			var regex_num = /^[\+]?(1[ .-]?)?(\([2-9]\d{2}\)[ .-]?|([2-9]\d{2}[ .-]?)){2}\d{4}$/;
 			var count_err = 0;
 
 			for (let index = 0; index < 4; index++) {
@@ -72,10 +73,10 @@ $(document).ready(
                                 },
                                 "data": JSON.stringify(
                                     {
-                                        "companyName": tab_input[0].value,
-                                        "leadName": tab_input[1].value,
-                                        "email" : tab_input[2].value,
-                                        "phone": tab_input[3].value
+                                        "companyName": tab_input[0].value.trim(),
+                                        "leadName": tab_input[1].value.trim(),
+                                        "email" : tab_input[2].value.trim(),
+                                        "phone": tab_input[3].value.toString().trim()
                                     }
                                 ),
                             };
