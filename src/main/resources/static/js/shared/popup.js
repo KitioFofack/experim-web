@@ -69,3 +69,11 @@ function getUrlValue()
 function pageRedirect() {
 	window.location.replace("Confirmation_d_inscription.html");
 }
+
+var experimLogo = document.querySelector(".experimLogo");
+experimLogo.addEventListener("click",clickLogo);
+
+function clickLogo() {
+	window.location.replace("index.html");
+	console.log("cool");
+}
