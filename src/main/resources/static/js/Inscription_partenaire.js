@@ -1,9 +1,8 @@
 
 // My Own code 
- function Redirect() {
-               window.location = "Confirmation_d_inscription.html";
-            }
-            //document.write("You will be redirected to main page in 10 sec.");
+function pageRedirect() {
+        window.location.replace("Confirmation_d_inscription.html");
+    }
 
 
 function submit() {
@@ -62,6 +61,7 @@ function submit() {
                   console.log(response);
                 });
 		    }
+		    pageRedirect();
 		}
 	}
 
