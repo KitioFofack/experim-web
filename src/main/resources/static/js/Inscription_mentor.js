@@ -69,7 +69,7 @@ function submit(event) {
               console.log(response);
             });
 
-		//pageRedirect();
+		pageRedirect();
 
 	}
 
