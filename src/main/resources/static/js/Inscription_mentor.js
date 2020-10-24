@@ -6,8 +6,7 @@ function pageRedirect() {
 function submit(event) {
 
 	inputs = document.getElementsByTagName("input");
-	var regex_mail = /^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$/;
-	var regex_mail = /^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$/;
+	var regex_mail = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]{2,}\.[a-zA-Z]{2,4}$/;
     var regex_name = /^[a-zA-ZêëïäâéèôÔÊËÏÄÉÈÂ]+[0-9a-zA-ZêëïäâéèôÔÊËÏÄÉÈÂ' -]{0,}$/;
     var regex_num = /^[\+]?(1[ .-]?)?(\([2-9]\d{2}\)[ .-]?|([2-9]\d{2}[ .-]?)){2}\d{4}$/;
     var tour = 0;
@@ -20,7 +19,6 @@ function submit(event) {
 			modalShow("Veuillez entrer le champ "+ name);
 			break;
 		}
-
 		if (i == 0 && !regex_name.test(inputs[i].value.trim())) {
              modalShow("Nom invalide");
              break;
@@ -34,8 +32,7 @@ function submit(event) {
             break;
         }
 
-        if (i == 3 && Date.parse(inputs[i].value) < Date.now()) {
-            console.log(Date.parse(inputs[i].value) + " " + Date.now());
+        if (i == 3 && (new Date() >= new Date(inputs[i].value))) {
             modalShow("Date incorrect !");
             break;
         }
@@ -56,7 +53,7 @@ function submit(event) {
                     "data": JSON.stringify(
                         {
                            "nom": inputs[0].value.trim(),
-                           "email": inputs[1].value.trim(),
+                           "email": inputs[1].value.trim().toLowerCase(),
                            "phone": inputs[2].value.toString().trim(),
                            "disponibilite": inputs[3].value
                         }
