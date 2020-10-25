@@ -1,27 +1,22 @@
 package ca.aretex.irex.experim.service;
 
-import ca.aretex.irex.experim.bean.Client;
+import ca.aretex.irex.experim.bean.request.Prospectable;
+import ca.aretex.irex.experim.bean.response.LeadData;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.client.RestTemplate;
 
-import java.io.IOException;
-import java.net.http.HttpClient;
+import java.nio.charset.StandardCharsets;
+import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Slf4j
 @Repository
 public class ERPNextRepository {
-
-    private static Logger logger = LoggerFactory.getLogger(ERPNextRepository.class);
-
-    private static HttpClient client;
 
     @Value("${erpnextServerURL}")
     private String erpnextServerURL;
@@ -33,58 +28,69 @@ public class ERPNextRepository {
     private String erpNextAccountPassword;
 
 
-    List<String> cookieList;
-    public HttpStatus save(Client clt) {
+
+
+
+    List<String> cookieList = Collections.emptyList();
+    public HttpStatus save(Prospectable clt) {
         //Response response;
-        logger.info ("About to save {}", clt);
+        log.info ("About to save {}", clt);
         try {
-            if (client == null) {
-                logger.info("Client unexistant, we have to instanciate one");
-                openConnexion();
-            }
-            String url = new StringBuilder().append(erpnextServerURL).append("/api/resource/Lead").toString();
-            logger.info("Request url: {}",url);
-            RestTemplate restTemplate = new RestTemplate();
-            HttpHeaders httpHeaders = new HttpHeaders();
+            String url = erpnextServerURL + "/api/resource/Lead";
+            log.info("Request url: {}",url);
+            RestTemplate restTemplate = getRestTemplate();
+            HttpHeaders httpHeaders = getHttpHeaders();
 
-            httpHeaders.setContentType(MediaType.APPLICATION_JSON);
-            httpHeaders.set("Cookie", cookieList.stream()
-                    .map(c -> c.toString())
-                    .collect(Collectors.joining(";")));
+            HttpEntity<String> entity = new HttpEntity<>(new ObjectMapper().writeValueAsString(clt), httpHeaders);
 
-            HttpEntity<String> entity = new HttpEntity<>(""+clt, httpHeaders);
-
-            logger.info("Data request using cookie string  : {}", cookieList.stream()
-                    .map(c -> c.toString())
-                    .collect(Collectors.joining(";")));
-            logger.info("request to be sent {}", entity);
-            ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.POST, entity, String.class);
-            logger.info("Request successfull, here is the response:  {}", response);
+            log.info("request to be sent {}", entity);
+            ResponseEntity<LeadData> response = restTemplate.exchange(url, HttpMethod.POST, entity, LeadData.class);
+            log.info("Request successfull, here is the response:  {}", response);
         } catch (Exception e) {
             e.printStackTrace();
         }
         return HttpStatus.CREATED;
     }
 
-    private void openConnexion() throws IOException {
-        client = HttpClient.newBuilder().build();
-        String bodyString = "{\"usr\":\"bngameni@irex.aretex.ca\",\"pwd\":\"Password@1234\"}";
-        RestTemplate restTemplate = new RestTemplate();
+    private HttpHeaders getHttpHeaders() {
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.setContentType(MediaType.APPLICATION_JSON);
+
+//        String auth = erpNextAccount + ":" + erpNextAccountPassword;
+//        byte[] encodedAuth = Base64.encodeBase64(auth.getBytes(StandardCharsets.US_ASCII));
+//        String authHeader = "Basic " + new String( encodedAuth );
+//        httpHeaders.set( "Authorization", authHeader );
+
+
+        if(cookieList.isEmpty()){
+            openConnexion();
+        }
+        httpHeaders.set("Cookie", String.join(";", cookieList));
+        return httpHeaders;
+    }
+
+    private RestTemplate getRestTemplate() {
+        return new RestTemplate();
+    }
+
+    private void openConnexion() {
+        RestTemplate restTemplate = getRestTemplate();
+        String bodyString = String.format("{\"usr\":\"%s\",\"pwd\":\"%s\"}", erpNextAccount, erpNextAccountPassword);
         HttpHeaders httpHeaders = new HttpHeaders();
 
-        String url = new StringBuilder().append(erpnextServerURL).append("/api/method/login").toString();
+        String url = erpnextServerURL + "/api/method/login";
 
         httpHeaders.setContentType(MediaType.APPLICATION_JSON);
         HttpEntity<String> entity = new HttpEntity<>("" + bodyString, httpHeaders);
         ResponseEntity<byte[]> response = restTemplate.exchange(url, HttpMethod.POST, entity, byte[].class);
 
-        logger.info("Sending request for connection opening with following parameters");
-        logger.info("URL String : {}",url);
-        logger.info("Body String : {}",bodyString);
-        logger.info("Response returned : {}", response);
+        log.info("Sending request for connection opening with following parameters");
+        log.info("URL String : {}",url);
+        log.info("Body String : {}",bodyString);
+        log.info("Response returned : {}", response);
         HttpHeaders headers = response.getHeaders();
-        logger.info("headers received {}", headers);
-        logger.info("Cookies received {}", headers.get(HttpHeaders.SET_COOKIE));
+        log.info("headers received {}", headers);
+        log.info("Cookies received {}", headers.get(HttpHeaders.SET_COOKIE));
         cookieList = headers.getValuesAsList(HttpHeaders.SET_COOKIE);
     }
 }

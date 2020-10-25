@@ -1,13 +1,11 @@
 package ca.aretex.irex.experim.controler;
 
-import ca.aretex.irex.experim.bean.Candidate;
-import ca.aretex.irex.experim.bean.Mentor;
-import ca.aretex.irex.experim.bean.Employeur;
-import ca.aretex.irex.experim.bean.Partner;
+import ca.aretex.irex.experim.bean.request.data.Candidate;
+import ca.aretex.irex.experim.bean.request.data.Employeur;
+import ca.aretex.irex.experim.bean.request.data.Mentor;
+import ca.aretex.irex.experim.bean.request.data.Partner;
 import ca.aretex.irex.experim.service.ERPNextRepository;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
