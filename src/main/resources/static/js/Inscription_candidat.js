@@ -19,7 +19,7 @@ function submit() {
 			name = inputs[i].name;
 			name = name.replace('_', ' ');
 			name = name.replace('_', ' ');
-			modalShow("Veuillesz entrer le champs "+ name);
+			modalShow("Veuillez entrer le champs "+ name);
 			break;
 		}
 		if (i == 1 && !regex.test(inputs[1].value)){
@@ -47,7 +47,7 @@ function submit() {
             },
             "data": JSON.stringify(
                 {
-                    "nom":inputs[0].value,
+                    "name":inputs[0].value,
                     "email":inputs[1].value,
                     "phone": inputs[2].value,
                 }
