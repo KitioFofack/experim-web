@@ -1,6 +1,7 @@
 package ca.aretex.irex.experim.bean.request.data;
 
 import ca.aretex.irex.experim.bean.request.Prospectable;
+import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonUnwrapped;
@@ -17,7 +18,7 @@ public class Employeur  implements Prospectable {
     @JsonUnwrapped
     Client client;
 
-    @JsonProperty("company_name")
+    @JsonProperty("company_name") @JsonAlias("companyName")
     public String getNomEntreprise(){
         return nomEntreprise;
     }

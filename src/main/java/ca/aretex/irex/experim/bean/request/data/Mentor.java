@@ -1,6 +1,7 @@
 package ca.aretex.irex.experim.bean.request.data;
 
 import ca.aretex.irex.experim.bean.request.Prospectable;
+import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonUnwrapped;
@@ -18,7 +19,7 @@ public class Mentor implements Prospectable {
 
     String disponibilite;
 
-    @JsonProperty("availability")
+    @JsonProperty("availability") @JsonAlias("disponibilite")
     public String getDisponibilite(){
         return disponibilite;
     }

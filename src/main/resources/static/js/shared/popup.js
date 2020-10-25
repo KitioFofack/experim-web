@@ -7,7 +7,6 @@ var modalContainer = document.createElement('div');
     modalContainer.setAttribute('id', 'modal'); 
 
 
-
 function modalShow(message) {
 
     var customBox = document.createElement('div');
@@ -15,7 +14,6 @@ function modalShow(message) {
 
     customBox.innerHTML = '<p>'+message+'</p>';
     customBox.innerHTML += '<button id="modal-close">OK</button>';
-
 
     modalContainer.appendChild(customBox);
     document.body.appendChild(modalContainer);

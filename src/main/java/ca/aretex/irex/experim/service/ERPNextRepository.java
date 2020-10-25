@@ -26,6 +26,7 @@ public class ERPNextRepository {
     private String erpNextAccountPassword;
 
 
+    RestTemplate restTemplate = getRestTemplate();
 
 
 
@@ -36,7 +37,7 @@ public class ERPNextRepository {
         try {
             String url = erpnextServerURL + "/api/resource/Lead";
             log.info("Request url: {}",url);
-            RestTemplate restTemplate = getRestTemplate();
+            //RestTemplate restTemplate = getRestTemplate();
             HttpHeaders httpHeaders = getHttpHeaders();
 
             HttpEntity<String> entity = new HttpEntity<>(new ObjectMapper().writeValueAsString(clt), httpHeaders);
@@ -72,19 +73,18 @@ public class ERPNextRepository {
     }
 
     private void openConnexion() {
-        RestTemplate restTemplate = getRestTemplate();
         String bodyString = String.format("{\"usr\":\"%s\",\"pwd\":\"%s\"}", erpNextAccount, erpNextAccountPassword);
         HttpHeaders httpHeaders = new HttpHeaders();
 
         String url = erpnextServerURL + "/api/method/login";
 
         httpHeaders.setContentType(MediaType.APPLICATION_JSON);
-        HttpEntity<String> entity = new HttpEntity<>("" + bodyString, httpHeaders);
+        HttpEntity<String> entity = new HttpEntity<>(bodyString, httpHeaders);
         ResponseEntity<byte[]> response = restTemplate.exchange(url, HttpMethod.POST, entity, byte[].class);
 
         log.info("Sending request for connection opening with following parameters");
         log.info("URL String : {}",url);
-        log.info("Body String : {}",bodyString);
+//        log.info("Body String : {}",bodyString);
         log.info("Response returned : {}", response);
         HttpHeaders headers = response.getHeaders();
         log.info("headers received {}", headers);

@@ -47,9 +47,9 @@ function submit() {
             },
             "data": JSON.stringify(
                 {
-                    "name":inputs[0].value,
+                    "lead_name":inputs[0].value,
                     "email":inputs[1].value,
-                    "phone": inputs[2].value,
+                    "phone": inputs[2].value
                 }
             ),
         };
@@ -57,7 +57,7 @@ function submit() {
     $.ajax(settings).done(function (response) {
       console.log(response);
     });
-
+    pageRedirect();
 	}
 
 }

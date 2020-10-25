@@ -62,8 +62,8 @@ $(document).ready(
                                 },
                                 "data": JSON.stringify(
                                     {
-                                        "nomEntreprise": tab_input[0].value.trim(),
-                                        "nomDuContact": tab_input[1].value.trim(),
+                                        "company_name": tab_input[0].value.trim(),
+                                        "lead_name": tab_input[1].value.trim(),
                                         "email" : tab_input[2].value.trim(),
                                         "phone": tab_input[3].value.trim()
                                     }

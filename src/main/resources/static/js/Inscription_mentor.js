@@ -55,7 +55,7 @@ function submit(event) {
                     },
                     "data": JSON.stringify(
                         {
-                           "nom": inputs[0].value.trim(),
+                           "lead_name": inputs[0].value.trim(),
                            "email": inputs[1].value.trim(),
                            "phone": inputs[2].value.toString().trim(),
                            "disponibilite": inputs[3].value
