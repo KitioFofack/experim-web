@@ -1,24 +1,58 @@
-function submit(event) {
+function pageRedirect() {
+    window.location.replace("Confirmation_d_inscription.html");
+}
 
+
+function submit(event) {
 	inputs = document.getElementsByTagName("input");
-	var regex = /^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$/;
-	var tour = 0;
+	var regex_mail = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]{2,}\.[a-zA-Z]{2,4}$/;
+    var regex_name = /^[a-zA-ZêëïäâéèôÔÊËÏÄÉÈÂ]+[0-9a-zA-ZêëïäâéèôÔÊËÏÄÉÈÂ' -]{0,}$/;
+    var regex_num = /^[\+]?(1[ .-]?)?(\([2-9]\d{2}\)[ .-]?|([2-9]\d{2}[ .-]?)){2}\d{4}$/;
+    var tour = 0;
 
 	for (let i = 0; i < inputs.length; i++) {
 		if (inputs[i].value == "") {
-			name = inputs[i].name;
-			name = name.replace('_', ' ');
-			name = name.replace('_', ' ');
-			modalShow("Veuillesz entrer le champs "+ name);
-			break;
+			if (inputs[i].value.replace(/^\s+|\s+$/g, "") == "") {
+                switch (i) {
+                    case 0:
+                        modalShow("Veuillez entrer votre nom");
+                        break;
+                    case 1:
+                        modalShow("Veuillez entrer le courriel");
+                        break;
+                    case 2:
+                        modalShow("Veuillez entrer le numéro de téléphone");
+                        break;
+                    case 3:
+                        modalShow("Veuillez entrer la disponiblité");
+                        break;
+                }
+                break;
+            }
 		}
-		if (i == 1 && !regex.test(inputs[i].value)){
-			modalShow("Le champs couriel n'est pas valide !");
-			break;
-		}
+		if (i == 0 && !regex_name.test(inputs[i].value.trim())) {
+             if (inputs[i].value.trim().charAt(0) in ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]){
+                 modalShow("Le nom ne doit pas commencer par un chiffre ! veillez reessayer");
+                 break;
+             } else {
+                 modalShow("Le nom du contact ne doit pas contenir de carractère spécial");
+                 break;
+             }
+        }
+        if (i == 1 && !regex_mail.test(inputs[i].value.trim())) {
+             modalShow("Le courriel doit être de la forme xxx@yyy.zz");
+             break;
+        }
+        if (i == 2 && !regex_num.test(inputs[i].value.trim())){
+            modalShow("Le numéro de téléphone doit être de la forme xxx yyy-zzzz");
+            break;
+        }
 
+        if (i == 3 && (new Date() >= new Date(inputs[i].value))) {
+            modalShow("veillez entrer votre disponibilité à partir de demain");
+            break;
+        }
 		tour+=1;
-		
 	}
 
 	if (tour == 4) {
@@ -32,9 +66,9 @@ function submit(event) {
                     },
                     "data": JSON.stringify(
                         {
-                           "nom": inputs[0].value,
-                           "email": inputs[1].value,
-                           "phone": inputs[2].value,
+                           "nom": inputs[0].value.trim(),
+                           "email": inputs[1].value.trim().toLowerCase(),
+                           "phone": inputs[2].value.toString().trim(),
                            "disponibilite": inputs[3].value
                         }
                     ),

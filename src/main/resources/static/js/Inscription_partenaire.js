@@ -41,8 +41,9 @@ function submit() {
 		        break;
 		    }
 		    else {
+		        var url=location.origin+"/submitPartner";
 		        var settings = {
-                    "url": "http://localhost:8080/submitPartner",
+                    "url": url,
                     "method": "POST",
                     "timeout": 0,
                     "headers": {
@@ -50,8 +51,8 @@ function submit() {
                     },
                     "data": JSON.stringify(
                         {
-                            "companyName":inputs[0].value.trim(),
-                            "leadName": inputs[1].value.trim(),
+                            "nomEntreprise": inputs[0].value.trim(),
+                            "name": inputs[1].value.trim(),
                             "email": inputs[2].value.trim(),
                             "phone": inputs[3].value.toString().trim()
                         }
