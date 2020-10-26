@@ -41,14 +41,14 @@ $(document).ready(
 			// redirect if it has no problem
 			if (count_err == 0) {
 				if (!regex.test(tab_input[2].value)) {
-					modalShow("Le champs "+tab_input[2].name+" n'est pas valide !");
+					modalShow("Veuillez entrer un courriel selon le format xxx@yyy.zz !");
 				}
 
 				else if(!regex_num.test(tab_input[3].value)){
                     while(tab_input[3].name.indexOf('_') >= 0) {
                         tab_input[3].name = tab_input[3].name.replace('_',' ');
                     }
-                    modalShow("Le champs "+tab_input[3].name+" n'est pas valide !");
+                    modalShow("Veuillez entrer un numéro de télephone selon le format xxx yyy-zzzz !");
                 }
 				else
 				{
