@@ -3,7 +3,6 @@
  function Redirect() {
                window.location = "Confirmation_d_inscription.html";
             }
-            //document.write("You will be redirected to main page in 10 sec.");
 
 
 function submit() {
@@ -14,30 +13,50 @@ function submit() {
 	var regex_num = /^[\+]?(1[ .-]?)?(\([2-9]\d{2}\)[ .-]?|([2-9]\d{2}[ .-]?)){2}\d{4}$/;
 
 	for (let i = 0; i < inputs.length; i++) {
-		if (inputs[i].value == "") {
-			name = inputs[i].name;
-			name = name.replace('_', ' ');
-			name = name.replace('_', ' ');
-			modalShow("Veuillez entrer le "+ name);
+		if (inputs[i].value.replace(/^\s+|\s+$/g, "") == "") {
+			switch (i) {
+			    case 0:
+                    modalShow("Veuillez entrer le nom de l'entrepise");
+                    break;
+                case 1:
+                    modalShow("Veuillez entrer votre nom");
+                    break;
+                case 2:
+                    modalShow("Veuillez entrer le courriel");
+                    break;
+                case 3:
+                    modalShow("Veuillez entrer le numéro de téléphone");
+                    break;
+			}
 			break;
 		}
 
 		if (i == 0 && !regex_company_name.test(inputs[i].value.trim())) {
-		    modalShow("Nom de l'entreprise invalide");
-		    break;
+		    if (inputs[i].value.length == 1) {
+		        modalShow("Le nom de l'entreprise doit contenir au moins 2 carractères");
+		        break;
+		    } else {
+		        modalShow("Le nom de l'entreprise doit pas contenir de carractères spécial ou commencer par ' ");
+		        break;
+		    }
 		}
 
 		if (i == 1 && !regex_contact_name.test(inputs[i].value.trim())) {
-            modalShow("Nom du contact invalide");
-            break;
+            if (inputs[i].value.trim().charAt(0) in ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]){
+                modalShow("Le nom ne doit pas commencer par un chiffre ! veillez reessayer");
+                break;
+            } else {
+                modalShow("Le nom du contact ne doit pas contenir de carractère spécial");
+                break;
+            }
         }
 		if (i == 2 && !regex_mail.test(inputs[i].value.toString().trim())){
-			modalShow("Le courriel n'est pas valide ! ");
+			modalShow("Le courriel doit être de la forme xxx@yyy.zz");
 			break;
 		}
 		else if (i == 3){
 		    if (!regex_num.test(inputs[i].value.toString().trim())) {
-		        modalShow("Le numéro de téléphone est invalide");
+		        modalShow("Le numéro de téléphone doit être de la forme xxx yyy-zzzz");
 		        break;
 		    }
 		    else {
@@ -62,6 +81,7 @@ function submit() {
                 $.ajax(settings).done(function (response) {
                   console.log(response);
                 });
+                Redirect();
 		    }
 		}
 	}
