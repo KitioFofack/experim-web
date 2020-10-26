@@ -3,13 +3,14 @@ package ca.aretex.irex.experim.service;
 import ca.aretex.irex.experim.bean.request.Prospectable;
 import ca.aretex.irex.experim.bean.response.LeadData;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.typesafe.config.Config;
+import com.typesafe.config.ConfigFactory;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.Collections;
 import java.util.List;
 
 @Slf4j
@@ -25,28 +26,25 @@ public class ERPNextRepository {
     @Value("${erpNextAccountPassword}")
     private String erpNextAccountPassword;
 
+    private static final ObjectMapper objectMapper = new ObjectMapper();
+    private static final RestTemplate restTemplate = new RestTemplate();;
+    private static final List<String> cookies = getAuthCookies();
 
-    RestTemplate restTemplate = getRestTemplate();
-
-
-
-    List<String> cookieList = Collections.emptyList();
-    public HttpStatus save(Prospectable clt) {
+    public HttpStatus save(Prospectable prospectable) {
         //Response response;
-        log.info ("About to save {}", clt);
+        log.info ("About to save {}", prospectable);
         try {
             String url = erpnextServerURL + "/api/resource/Lead";
             log.info("Request url: {}",url);
-            //RestTemplate restTemplate = getRestTemplate();
             HttpHeaders httpHeaders = getHttpHeaders();
 
-            HttpEntity<String> entity = new HttpEntity<>(new ObjectMapper().writeValueAsString(clt), httpHeaders);
+            HttpEntity<String> entity = new HttpEntity<>(objectMapper.writeValueAsString(prospectable), httpHeaders);
 
             log.info("request to be sent {}", entity);
             ResponseEntity<LeadData> response = restTemplate.exchange(url, HttpMethod.POST, entity, LeadData.class);
             log.info("Request successfull, here is the response:  {}", response);
         } catch (Exception e) {
-            e.printStackTrace();
+           log.error("Could not save Prospectable={} due to", prospectable, e);
         }
         return HttpStatus.CREATED;
     }
@@ -60,23 +58,19 @@ public class ERPNextRepository {
 //        String authHeader = "Basic " + new String( encodedAuth );
 //        httpHeaders.set( "Authorization", authHeader );
 
-
-        if(cookieList.isEmpty()){
-            openConnexion();
-        }
-        httpHeaders.set("Cookie", String.join(";", cookieList));
+        httpHeaders.set("Cookie", String.join(";", cookies));
         return httpHeaders;
     }
 
-    private RestTemplate getRestTemplate() {
-        return new RestTemplate();
-    }
-
-    private void openConnexion() {
-        String bodyString = String.format("{\"usr\":\"%s\",\"pwd\":\"%s\"}", erpNextAccount, erpNextAccountPassword);
+    private static List<String> getAuthCookies() {
+        Config config = ConfigFactory.load("application.properties");
+        String bodyString = String.format(
+                "{\"usr\":\"%s\",\"pwd\":\"%s\"}",
+                config.getString("erpNextAccount"), config.getString("erpNextAccountPassword")
+        );
         HttpHeaders httpHeaders = new HttpHeaders();
 
-        String url = erpnextServerURL + "/api/method/login";
+        String url = config.getString("erpnextServerURL") + "/api/method/login";
 
         httpHeaders.setContentType(MediaType.APPLICATION_JSON);
         HttpEntity<String> entity = new HttpEntity<>(bodyString, httpHeaders);
@@ -84,11 +78,10 @@ public class ERPNextRepository {
 
         log.info("Sending request for connection opening with following parameters");
         log.info("URL String : {}",url);
-//        log.info("Body String : {}",bodyString);
         log.info("Response returned : {}", response);
         HttpHeaders headers = response.getHeaders();
         log.info("headers received {}", headers);
         log.info("Cookies received {}", headers.get(HttpHeaders.SET_COOKIE));
-        cookieList = headers.getValuesAsList(HttpHeaders.SET_COOKIE);
+        return headers.getValuesAsList(HttpHeaders.SET_COOKIE);
     }
 }
