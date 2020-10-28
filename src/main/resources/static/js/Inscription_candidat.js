@@ -2,7 +2,9 @@
 
 // My Own code 
 
-
+function pageRedirect() {
+	window.location.replace("Confirmation_d_inscription.html");
+}
 
 
 function submit() {
@@ -17,7 +19,7 @@ function submit() {
 			name = inputs[i].name;
 			name = name.replace('_', ' ');
 			name = name.replace('_', ' ');
-			modalShow("Veuillesz entrer le champs "+ name);
+			modalShow("Veuillez entrer le champs "+ name);
 			break;
 		}
 		if (i == 1 && !regex.test(inputs[1].value)){
@@ -33,12 +35,11 @@ function submit() {
 
 		tour+=1;
 	}
-	
 
 	if (tour == 5) {
-
+        var url =  location.origin+"/submitCandidate";
         var settings = {
-            "url": getUrlValue()+"/submitCandidate",
+            "url": url,
             "method": "POST",
             "timeout": 0,
             "headers": {
@@ -48,8 +49,7 @@ function submit() {
                 {
                     "lead_name":inputs[0].value,
                     "email_id":inputs[1].value,
-                    "phone": inputs[2].value,
-                    "password": inputs[3].value
+                    "phone": inputs[2].value
                 }
             ),
         };
@@ -57,7 +57,7 @@ function submit() {
     $.ajax(settings).done(function (response) {
       console.log(response);
     });
-
+    pageRedirect();
 	}
 
 }

@@ -19,7 +19,8 @@ $(document).ready(
 			
 			//get all champs
 			var tab_input = $(":input");
-			var regex = /^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$/;
+			var regex = /^[a-zA-Z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$/;
+			var regex_num = /^[\+]?(1[ .-]?)?(\([2-9]\d{2}\)[ .-]?|([2-9]\d{2}[ .-]?)){2}\d{4}$/;
 			var count_err = 0;
 
 			for (let index = 0; index < 4; index++) {
@@ -37,16 +38,23 @@ $(document).ready(
 				}
 			}
 
-
 			// redirect if it has no problem
 			if (count_err == 0) {
 				if (!regex.test(tab_input[2].value)) {
 					modalShow("Le champs "+tab_input[2].name+" n'est pas valide !");
 				}
+
+				else if(!regex_num.test(tab_input[3].value)){
+                    while(tab_input[3].name.indexOf('_') >= 0) {
+                        tab_input[3].name = tab_input[3].name.replace('_',' ');
+                    }
+                    modalShow("Le champs "+tab_input[3].name+" n'est pas valide !");
+                }
 				else
 				{
-					var settings = {
-                                "url": getUrlValue()+"/submitEmployeurs",
+				    var url=location.origin+"/submitEmployeur";
+					 var settings = {
+                                "url": url,
                                 "method": "POST",
                                 "timeout": 0,
                                 "headers": {
@@ -54,10 +62,10 @@ $(document).ready(
                                 },
                                 "data": JSON.stringify(
                                     {
-                                        "compagny_name": tab_input[0].value,
-                                        "lead_name": tab_input[1].value,
-                                        "email_id" : tab_input[2].value,
-                                        "phone": tab_input[3].value
+                                        "company_name": tab_input[0].value.trim(),
+                                        "lead_name": tab_input[1].value.trim(),
+                                        "email_id" : tab_input[2].value.trim(),
+                                        "phone": tab_input[3].value.trim()
                                     }
                                 ),
                             };
@@ -65,9 +73,7 @@ $(document).ready(
                         $.ajax(settings).done(function (response) {
                           console.log(response);
                         });
-
-
-					//pageRedirect();
+					pageRedirect();
 				}
 			}
 

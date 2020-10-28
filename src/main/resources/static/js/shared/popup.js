@@ -1,8 +1,10 @@
 
+config={
+    "urlValue" : "http://localhost:8080"
+}
 
 var modalContainer = document.createElement('div');
     modalContainer.setAttribute('id', 'modal'); 
-
 
 
 function modalShow(message) {
@@ -12,7 +14,6 @@ function modalShow(message) {
 
     customBox.innerHTML = '<p>'+message+'</p>';
     customBox.innerHTML += '<button id="modal-close">OK</button>';
-
 
     modalContainer.appendChild(customBox);
     document.body.appendChild(modalContainer);
@@ -63,3 +64,13 @@ function getUrlValue()
     return jsonData['config'][0].urlValue;
 }
 
+function pageRedirect() {
+	window.location.replace("Confirmation_d_inscription.html");
+}
+
+var experimLogo = document.querySelector(".experimLogo");
+experimLogo.addEventListener("click",clickLogo);
+
+function clickLogo() {
+	window.location.replace("/");
+}

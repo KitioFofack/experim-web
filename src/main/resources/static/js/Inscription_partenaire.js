@@ -1,15 +1,16 @@
 
 // My Own code 
- function Redirect() {
-               window.location = "Confirmation_d_inscription.html";
-            }
-            //document.write("You will be redirected to main page in 10 sec.");
+function pageRedirect() {
+        window.location.replace("Confirmation_d_inscription.html");
+    }
 
 
 function submit() {
 	inputs = document.getElementsByTagName("input");
-	var regex = /^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$/;
-	var regex_num = /^0{2}|\+?(1[.-])?(\(\d{3}\)[.-]|(\d{3}[.-]?)){2}\d{4}$/;
+	var regex_mail = /^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$/;
+	var regex_contact_name = /^[a-zA-ZêëïäâéèôÔÊËÏÄÉÈÂ]+[0-9a-zA-ZêëïäâéèôÔÊËÏÄÉÈÂ' -]{0,}$/;
+	var regex_company_name = /^[0-9a-zA-ZêëïäâéèôÔÊËÏÄÉÈÂ]+[.0-9a-zA-ZêëïäâéèôÔÊËÏÄÉÈÂ' -]{1,}$/;
+	var regex_num = /^[\+]?(1[ .-]?)?(\([2-9]\d{2}\)[ .-]?|([2-9]\d{2}[ .-]?)){2}\d{4}$/;
 
 	for (let i = 0; i < inputs.length; i++) {
 		if (inputs[i].value == "") {
@@ -19,18 +20,30 @@ function submit() {
 			modalShow("Veuillez entrer le "+ name);
 			break;
 		}
-		if (i == 2 && !regex.test(inputs[i].value)){
+
+		if (i == 0 && !regex_company_name.test(inputs[i].value.trim())) {
+		    modalShow("Nom de l'entreprise invalide");
+		    break;
+		}
+
+		if (i == 1 && !regex_contact_name.test(inputs[i].value.trim())) {
+            modalShow("Nom du contact invalide");
+            break;
+        }
+		if (i == 2 && !regex_mail.test(inputs[i].value.toString().trim())){
 			modalShow("Le courriel n'est pas valide ! ");
 			break;
 		}
 		else if (i == 3){
-		    if (!regex_num.test(inputs[i].value)) {
+		    if (!regex_num.test(inputs[i].value.toString().trim())) {
 		        modalShow("Le numéro de téléphone est invalide");
 		        break;
 		    }
 		    else {
+
+		        var url = location.origin+"/submitPartner";
 		        var settings = {
-                    "url": getUrlValue()+"/submitPartner",
+                    "url": url,
                     "method": "POST",
                     "timeout": 0,
                     "headers": {
@@ -38,10 +51,10 @@ function submit() {
                     },
                     "data": JSON.stringify(
                         {
-                            "company_name":inputs[0].value,
-                            "lead_name": inputs[1].value,
-                            "email_id": inputs[2].value,
-                            "phone": inputs[3].value
+                            "company_name":inputs[0].value.trim(),
+                            "lead_name": inputs[1].value.trim(),
+                            "email_id": inputs[2].value.trim(),
+                            "phone": inputs[3].value.toString().trim()
                         }
                     ),
                 };
@@ -50,6 +63,7 @@ function submit() {
                   console.log(response);
                 });
 		    }
+		    pageRedirect();
 		}
 	}
 

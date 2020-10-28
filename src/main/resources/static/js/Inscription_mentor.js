@@ -1,30 +1,53 @@
+function pageRedirect() {
+    window.location.replace("Confirmation_d_inscription.html");
+}
+
+
 function submit(event) {
 
 	inputs = document.getElementsByTagName("input");
-	var regex = /^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$/;
-	var tour = 0;
+	var regex_mail = /^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$/;
+	var regex_mail = /^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$/;
+    var regex_name = /^[a-zA-ZêëïäâéèôÔÊËÏÄÉÈÂ]+[0-9a-zA-ZêëïäâéèôÔÊËÏÄÉÈÂ' -]{0,}$/;
+    var regex_num = /^[\+]?(1[ .-]?)?(\([2-9]\d{2}\)[ .-]?|([2-9]\d{2}[ .-]?)){2}\d{4}$/;
+    var tour = 0;
 
 	for (let i = 0; i < inputs.length; i++) {
 		if (inputs[i].value == "") {
 			name = inputs[i].name;
 			name = name.replace('_', ' ');
 			name = name.replace('_', ' ');
-			modalShow("Veuillesz entrer le champs "+ name);
+			modalShow("Veuillez entrer le champ "+ name);
 			break;
 		}
-		if (i == 1 && !regex.test(inputs[i].value)){
-			modalShow("Le champs couriel n'est pas valide !");
-			break;
-		}
+
+		if (i == 0 && !regex_name.test(inputs[i].value.trim())) {
+             modalShow("Nom invalide");
+             break;
+        }
+        if (i == 1 && !regex_mail.test(inputs[i].value.trim())) {
+             modalShow("Le courriel n'est pas valide ! ");
+             break;
+        }
+        if (i == 2 && !regex_num.test(inputs[i].value.toString().trim())){
+            modalShow("Le numéro de téléphone est invalide");
+            break;
+        }
+
+        if (i == 3 && Date.parse(inputs[i].value) < Date.now()) {
+            console.log(Date.parse(inputs[i].value) + " " + Date.now());
+            modalShow("Date incorrect !");
+            break;
+        }
 
 		tour+=1;
 		
 	}
 
 	if (tour == 4) {
-
+          var url = location.origin+"/submitMentor";
 		  var settings = {
-                    "url": getUrlValue()+"/submitMentor",
+                    "url": url,
                     "method": "POST",
                     "timeout": 0,
                     "headers": {
@@ -32,9 +55,9 @@ function submit(event) {
                     },
                     "data": JSON.stringify(
                         {
-                           "nom": inputs[0].value,
-                           "courriel": inputs[1].value,
-                           "telephone": inputs[2].value,
+                           "lead_name": inputs[0].value.trim(),
+                           "email_id": inputs[1].value.trim(),
+                           "phone": inputs[2].value.toString().trim(),
                            "disponibilite": inputs[3].value
                         }
                     ),
@@ -44,7 +67,7 @@ function submit(event) {
               console.log(response);
             });
 
-		//window.location.href='./Confirmation_d_inscription.html';
+		pageRedirect();
 
 	}
 
