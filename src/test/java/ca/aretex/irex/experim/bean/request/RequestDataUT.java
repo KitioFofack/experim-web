@@ -1,10 +1,15 @@
 package ca.aretex.irex.experim.bean.request;
 
 import ca.aretex.irex.experim.bean.request.data.*;
+import ca.aretex.irex.experim.bean.response.LeadData;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -43,5 +48,27 @@ public class RequestDataUT {
         log.info("partnerJson={}", partnerJson);
 
         assertThat(objectMapper.readValue(partnerJson, Partner.class)).isEqualTo(partner);
+    }
+
+    @Test
+    public void leadDataCandidateTest() throws IOException {
+        String candidateJson = Files.readString(Paths.get("target/test-classes/data/http/CandidateResponse.json"));
+        log.info("candidateJson={}", candidateJson);
+        LeadData leadData = objectMapper.readValue(candidateJson, LeadData.class);
+        log.info("leadData={}", leadData);
+
+        assertThat(leadData.getData()).isNotEmpty();
+        assertThat(leadData.getData().get("lead_name").toString()).isEqualToIgnoringCase("ctest");
+    }
+
+    @Test
+    public void leadDataEmployeurTest() throws IOException {
+        String employeurJson = Files.readString(Paths.get("target/test-classes/data/http/EmployeurResponse.json"));
+        log.info("employeurJson={}", employeurJson);
+        LeadData leadData = objectMapper.readValue(employeurJson, LeadData.class);
+        log.info("leadData={}", leadData);
+
+        assertThat(leadData.getData()).isNotEmpty();
+        assertThat(leadData.getData().get("company_name").toString()).isEqualToIgnoringCase("neads");
     }
 }
