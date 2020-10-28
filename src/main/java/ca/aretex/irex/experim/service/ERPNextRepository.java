@@ -41,7 +41,7 @@ public class ERPNextRepository {
             HttpEntity<String> entity = new HttpEntity<>(objectMapper.writeValueAsString(prospectable), httpHeaders);
 
             log.info("request to be sent {}", entity);
-            ResponseEntity<LeadData> response = restTemplate.exchange(url, HttpMethod.POST, entity, LeadData.class);
+            ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.POST, entity, String.class);
             log.info("Request successfull, here is the response:  {}", response);
         } catch (Exception e) {
            log.error("Could not save Prospectable={} due to", prospectable, e);
