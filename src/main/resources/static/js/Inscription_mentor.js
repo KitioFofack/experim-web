@@ -34,10 +34,13 @@ function submit(event) {
             break;
         }
 
-        if (i == 3 && Date.parse(inputs[i].value) < Date.now()) {
-            console.log(Date.parse(inputs[i].value) + " " + Date.now());
-            modalShow("Date incorrect !");
-            break;
+        if (i == 3) {
+            let [month, date, year] = ( new Date(inputs[i].value) ).toLocaleDateString().split("/");
+            let [thisMonth, thisDate, thisYear] = ( new Date() ).toLocaleDateString().split("/");
+            if ( new Date(year, month, date) <= new Date(thisYear, thisMonth, thisDate) ) {
+                modalShow("Veillez renseigner votre disponibilité au moins pour demain ! ");
+                 break;
+            }
         }
 
 		tour+=1;
