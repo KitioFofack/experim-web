@@ -35,14 +35,18 @@ public class ERPNextRepository {
         log.info ("About to save {}", prospectable);
         try {
             String url = erpnextServerURL + "/api/resource/Lead";
+            String urlLogout = erpnextServerURL + "/api/method/logout";
             log.info("Request url: {}",url);
             HttpHeaders httpHeaders = getHttpHeaders();
 
             HttpEntity<String> entity = new HttpEntity<>(objectMapper.writeValueAsString(prospectable), httpHeaders);
+            HttpEntity<String> entityLogout = new HttpEntity<>(httpHeaders);
 
             log.info("request to be sent {}", entity);
             ResponseEntity<LeadData> response = restTemplate.exchange(url, HttpMethod.POST, entity, LeadData.class);
             log.info("Request successfull, here is the response:  {}", response);
+            ResponseEntity<String> responseLogout = restTemplate.exchange(urlLogout, HttpMethod.GET, entityLogout, String.class);
+            log.info("response for logging out {} ", responseLogout);
         } catch (Exception e) {
            log.error("Could not save Prospectable={} due to", prospectable, e);
         }
