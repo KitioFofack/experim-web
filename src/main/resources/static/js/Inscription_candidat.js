@@ -48,7 +48,7 @@ function submit() {
             "data": JSON.stringify(
                 {
                     "lead_name":inputs[0].value,
-                    "email":inputs[1].value,
+                    "email_id":inputs[1].value,
                     "phone": inputs[2].value
                 }
             ),
