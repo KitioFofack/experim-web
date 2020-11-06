@@ -30,15 +30,16 @@ public class ERPNextRepository {
     private static final ObjectMapper objectMapper = new ObjectMapper();
     private static final RestTemplate restTemplate = new RestTemplate();
 
-    private static boolean isLogout = false;
-    private static HttpHeaders httpHeaders = login();
+    private final HttpHeaders httpHeaders = new HttpHeaders();
+    private static boolean isLogout = true;
 
     public HttpStatus save(Prospectable prospectable) {
         //Response response;
         log.info ("About to save {}", prospectable);
+        ResponseEntity<LeadData> response = null;
         try {
             if(isLogout){
-                httpHeaders = login();
+                login();
             }
             String url = erpnextServerURL + "/api/resource/Lead";
             log.info("Request url: {}",url);
@@ -46,34 +47,30 @@ public class ERPNextRepository {
             HttpEntity<String> entity = new HttpEntity<>(objectMapper.writeValueAsString(prospectable), httpHeaders);
 
             log.info("request to be sent {}", entity);
-            ResponseEntity<LeadData> response = restTemplate.exchange(url, HttpMethod.POST, entity, LeadData.class);
+            response = restTemplate.exchange(url, HttpMethod.POST, entity, LeadData.class);
             log.info("Request successfull, here is the response:  {}", response);
         } catch (Exception e) {
            log.error("Could not save Prospectable={} due to", prospectable, e);
         } finally {
             logout();
         }
-        return HttpStatus.CREATED;
+        return response!=null ? response.getStatusCode(): HttpStatus.FAILED_DEPENDENCY;
     }
 
-    private static HttpHeaders buildHttpHeaders(List<String> cookies) {
-        HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.setContentType(MediaType.APPLICATION_JSON);
+    private void updateHttpHeaders(List<String> cookies) {
         httpHeaders.set("Cookie", String.join(";", cookies));
-        return httpHeaders;
     }
 
-    private static HttpHeaders login() {
+    private void login() {
         log.info("login into erpnext...");
         String bodyString = String.format(
                 "{\"usr\":\"%s\",\"pwd\":\"%s\"}",
                 config.getString("erpNextAccount"), config.getString("erpNextAccountPassword")
         );
-        HttpHeaders httpHeaders = new HttpHeaders();
 
         String urlLogin = config.getString("erpnextServerURL") + "/api/method/login";
-
         httpHeaders.setContentType(MediaType.APPLICATION_JSON);
+
         HttpEntity<String> entity = new HttpEntity<>(bodyString, httpHeaders);
         ResponseEntity<byte[]> response = restTemplate.exchange(urlLogin, HttpMethod.POST, entity, byte[].class);
 
@@ -84,12 +81,11 @@ public class ERPNextRepository {
         log.info("headers received {}", headers);
         log.info("Cookies received {}", headers.get(HttpHeaders.SET_COOKIE));
         List<String> cookies = headers.getValuesAsList(HttpHeaders.SET_COOKIE);
-        httpHeaders = buildHttpHeaders(cookies);
         isLogout = false;
-        return httpHeaders;
+        updateHttpHeaders(cookies);
     }
 
-    private static void logout(){
+    private void logout(){
         try {
             log.info("logout from erpnext...");
             String urlLogout = config.getString("erpnextServerURL") + "/api/method/logout";
