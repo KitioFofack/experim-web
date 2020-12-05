@@ -15,8 +15,8 @@ git clone https://github.com/KitioFofack/experim-web.git
 cd ~/experim-web
 
 #checkout to main branch
-git checkout main
-
+git checkout rest_template_docker_compose
+i
 #create dockerfile
 echo "-----------> Create dockerfile"
 cat << EOF > ~/experim-web/Dockerfile
