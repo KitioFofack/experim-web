@@ -1,0 +1,18 @@
+version: '3'
+services:
+  experim:
+    image: experim:v1
+    container_name: experim-docker_2
+    ports:
+      - "8080:8080"
+  nginx:
+    image: nginx:1.15-alpine
+    container_name: webserver_exp
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/experim.conf:/etc/nginx/conf.d
+      - ./certbot:/etc/ssl/nginx
+
+
