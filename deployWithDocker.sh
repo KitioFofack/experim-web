@@ -16,7 +16,7 @@ cd ~/experim-web
 
 #checkout to main branch
 git checkout rest_template_docker_compose
-i
+
 #create dockerfile
 echo "-----------> Create dockerfile"
 cat << EOF > ~/experim-web/Dockerfile
@@ -44,6 +44,8 @@ mvn clean package
 echo "-------->remove existing image, no be affraid by error"
 docker rmi -f experim:v1
 docker rm -f experim-docker
+docker rmi -f nginx:1.15-alpine
+docker rm -f webserver_exp
 
 #build image
 echo "--------> build docker image"

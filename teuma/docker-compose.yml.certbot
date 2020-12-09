@@ -1,0 +1,39 @@
+version: '3'
+
+services:
+  experim:
+    image: experim:v1
+    container_name: experim
+    restart: unless-stopped
+    networks:
+      - app-network
+
+  webserver:
+    depends_on:
+      - experim
+    image: nginx:1.15.12-alpine
+    container_name: webserver
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx:/etc/nginx/conf.d
+      - certbot:/etc/letsencrypt
+    networks:
+      - app-network
+
+  certbot:
+    depends_on:
+      - webserver
+    image: certbot/certbot
+    container_name: certbot
+    volumes:
+      - certbot:/etc/letsencrypt
+    command: certonly --webroot --webroot-path=/var/www/html --email lsonwa@irex.aretex.ca --agree-tos --no-eff-email --staging -d wp.dev.irex.aretex.ca -d www.wp.dev.irex.aretex.ca
+
+volumes:
+  certbot:
+
+networks:
+  app-network:
+    driver: bridge
