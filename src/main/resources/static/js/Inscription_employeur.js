@@ -72,8 +72,8 @@ $(document).ready(
 
                         $.ajax(settings).done(function (response) {
                           console.log(response);
+                          pageRedirect();
                         });
-					pageRedirect();
 				}
 			}
 

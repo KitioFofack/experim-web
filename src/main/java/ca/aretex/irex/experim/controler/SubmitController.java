@@ -16,31 +16,37 @@ public class SubmitController {
 
     @Autowired
     private ERPNextRepository backendService;
+    ResponseEntity responseEntity;
+
     @PostMapping("/submitCandidate")
-    public ResponseEntity submitCandidate(@RequestBody Candidate candidate){
+    public String submitCandidate(@RequestBody Candidate candidate){
         log.info("Processing request to save a new Candidate");
-        return ResponseEntity.status(backendService.save(candidate)).build();
+        responseEntity = ResponseEntity.status(backendService.save(candidate)).build();
+        log.info("response entity : {}",responseEntity);
+        return "redirect:/Confirmation_d_inscription.html";
     }
 
     @PostMapping("/submitEmployeur")
-    public ResponseEntity submitEmployeur(@RequestBody Employeur employeur){
+    public String submitEmployeur(@RequestBody Employeur employeur){
         log.info("Processing request to save a new Employer");
-        return ResponseEntity.status(backendService.save(employeur)).build();
+        responseEntity = ResponseEntity.status(backendService.save(employeur)).build();
+        log.info("response entity : {}",responseEntity);
+        return "redirect:/Confirmation_d_inscription.html";
     }
 
     @PostMapping("/submitPartner")
-    public ResponseEntity submitPartner(@RequestBody Partner partner) {
+    public String submitPartner(@RequestBody Partner partner) {
         log.info("Processing request to save a new partner");
-        ResponseEntity responseEntity = ResponseEntity.status(backendService.save(partner)).build();
+        responseEntity = ResponseEntity.status(backendService.save(partner)).build();
         log.info("response entity : {}",responseEntity);
-        return ResponseEntity.status(backendService.save(partner)).build();
-        //return "redirect:/Confirmation_d_inscription.html";
+        return "redirect:/Confirmation_d_inscription.html";
     }
 
     @PostMapping("/submitMentor")
-    public ResponseEntity submitMentor(@RequestBody Mentor mentor) {
+    public String submitMentor(@RequestBody Mentor mentor) {
         log.info("Processing request to save a new Mentor");
-
-        return ResponseEntity.status(backendService.save(mentor)).build();
+        responseEntity = ResponseEntity.status(backendService.save(mentor)).build();
+        log.info("response entity : {}",responseEntity);
+        return "redirect:/Confirmation_d_inscription.html";
     }
 }
