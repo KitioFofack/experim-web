@@ -8,9 +8,7 @@ import ca.aretex.irex.experim.service.ERPNextRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @RestController
@@ -33,7 +31,10 @@ public class SubmitController {
     @PostMapping("/submitPartner")
     public ResponseEntity submitPartner(@RequestBody Partner partner) {
         log.info("Processing request to save a new partner");
+        ResponseEntity responseEntity = ResponseEntity.status(backendService.save(partner)).build();
+        log.info("response entity : {}",responseEntity);
         return ResponseEntity.status(backendService.save(partner)).build();
+        //return "redirect:/Confirmation_d_inscription.html";
     }
 
     @PostMapping("/submitMentor")
