@@ -1,5 +1,7 @@
+COUNTRY="CA"
 STATE="Quebec"
 LOCALITY="Montreal"
 ORGANIZATION="ARETEX"
+ORGANIZATIONALUNIT="IREX"
 EMAIL="contact-irex@aretex.ca"
 PASSWORD="password"
