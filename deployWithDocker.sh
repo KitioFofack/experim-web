@@ -1,22 +1,22 @@
 #!/bin/bash
 
 #back to home
-cd ~
+#cd ~
 
 ## Install git
-apt-get install git -y
+#apt-get install git -y
 ## install openssl
 apt-get install -y openssl certbot
 
 ##rmove all directory
-rm -rf ~/experim-web
+#rm -rf ~/experim-web
 ##clone the repository
 echo "-----> clone the repo"
-git clone https://github.com/KitioFofack/experim-web.git
-cd ~/experim-web
+#git clone https://github.com/KitioFofack/experim-web.git
+#cd ~/experim-web
 
 #checkout to main branch
-git checkout rest_template_docker_compose
+#git checkout rest_template_docker_compose
 
 #create dockerfile
 echo "-----------> Create dockerfile"
@@ -35,7 +35,7 @@ echo "----------> Install maven"
 sudo apt-get install -y maven
 
 #enter into the project directory
-cd ~/experim-web/
+#cd ~/experim-web/
 
 source conf.defaults
 
@@ -56,7 +56,8 @@ docker build -t experim:v1 .
 
 ##Key generation
 echo "--------> generating key"
-openssl genrsa -aes256 -passout pass:$PASSWORD -out $HOSTNAME.Key 4046
+echo $PWD
+openssl genrsa -aes256 -passout pass:$PASSWORD -out $HOSTNAME.key 4046
 ##Remove pem phrase from the key
 openssl rsa -in ./$HOSTNAME.key -passin pass:$PASSWORD -out $HOSTNAME.key
 
@@ -66,7 +67,7 @@ mv $HOSTNAME.key $HOSTNAME.crt ./docker-compose-data/certbot
 
 #run docker compose
 echo "--------> running docker compose"
-cd docker-compose
+cd docker-compose-data
 docker-compose up
 
 #launch to nav
