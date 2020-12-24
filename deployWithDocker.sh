@@ -5,6 +5,8 @@ cd ~
 
 ## Install git
 sudo apt install git -y
+## install openssl
+apt-get install -y openssl certbot
 
 ##rmove all directory
 rm -rf ~/experim-web
@@ -51,9 +53,20 @@ docker rm -f webserver_exp
 echo "--------> build docker image"
 docker build -t experim:v1 .
 
-#run docker
-echo "--------> run docker"
-docker run -tid --name experim-docker -p 8080:8080 experim:v1
+##Key generation
+echo "--------> generating key"
+openssl genrsa -aes256 -passout pass:$PASSWORD -out $HOSTNAME.Key 4046
+##Remove pem phrase from the key
+openssl rsa -in ./$HOSTNAME.key -passin pass:$PASSWORD -out $HOSTNAME.key
+
+##Creating a certificate
+openssl req rsa -key ./$HOSTNAME.key -new -x509 -days 365 -out $HOSTNAME.crt -passin pass:$PASSWORD -subj "/C=$COUNTRY/ST=$STATE/L=$LOCALITY/O=$ORGANIZATION/OU=$ORGANIZATION_UNIT/CN=$DOMAIN/emailAddress=$EMAIL"
+mv $HOSTNAME.key $HOSTNAME.crt ./docker-compose-data/certbot
+
+#run docker compose
+echo "--------> running docker compose"
+cd docker-compose
+docker-compose up
 
 #launch to nav
 echo "---------->run http://$hostname:8080/ on browser"
