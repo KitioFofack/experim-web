@@ -4,14 +4,13 @@
 cd ~
 
 ## Install git
-sudo apt install git -y
+apt-get install git -y
 ## install openssl
 apt-get install -y openssl certbot
 
 ##rmove all directory
 rm -rf ~/experim-web
-
-#clone the repository
+##clone the repository
 echo "-----> clone the repo"
 git clone https://github.com/KitioFofack/experim-web.git
 cd ~/experim-web
@@ -37,6 +36,8 @@ sudo apt-get install -y maven
 
 #enter into the project directory
 cd ~/experim-web/
+
+source conf.defaults
 
 #create jar package
 echo "-----------> Create jar package"
