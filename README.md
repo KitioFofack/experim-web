@@ -2,6 +2,7 @@
 experim portail
 
 [docker deployment]
+This is done on debian 10
 
 1- install git
 2- clone the repository at https://github.com/KitioFofack/experim-web.git
