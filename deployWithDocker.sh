@@ -64,6 +64,9 @@ openssl rsa -in ./$HOSTNAME.key -passin pass:$PASSWORD -out $HOSTNAME.key
 openssl req -key ./$HOSTNAME.key -new -x509 -days 365 -out $HOSTNAME.crt -passin pass:$PASSWORD -subj "/C=$COUNTRY/ST=$STATE/L=$LOCALITY/O=$ORGANIZATION/OU=$ORGANIZATIONALUNIT/CN=$HOSTNAME/emailAddress=$EMAIL"
 mv $HOSTNAME.key $HOSTNAME.crt ./docker-compose-data/certbot
 
+##setting up nginx configuration file
+source ./nginx_exp_conf.sh
+
 #run docker compose
 echo "--------> running docker compose"
 cd docker-compose-data
