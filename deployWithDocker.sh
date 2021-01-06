@@ -11,24 +11,12 @@ apt-get install -y openssl certbot
 ##rmove all directory
 #rm -rf ~/experim-web
 ##clone the repository
-echo "-----> clone the repo"
+#echo "-----> clone the repo"
 #git clone https://github.com/KitioFofack/experim-web.git
 #cd ~/experim-web
 
 #checkout to main branch
-git checkout rest_template_docker_compose
-
-#create dockerfile
-echo "-----------> Create dockerfile"
-cat << EOF > ~/experim-web/Dockerfile
-FROM openjdk:11
-VOLUME /tmp
-ADD target/experim-0.0.1-SNAPSHOT.jar app.jar
-RUN bash -c 'touch /app.jar'
-EXPOSE 8080
-ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]
-EOF
-
+#git checkout rest_template_docker_compose
 
 #install maven
 echo "----------> Install maven"
