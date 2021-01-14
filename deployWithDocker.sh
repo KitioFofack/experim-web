@@ -53,6 +53,7 @@ openssl req -key ./$HOSTNAME.key -new -x509 -days 365 -out $HOSTNAME.crt -passin
 mv $HOSTNAME.key $HOSTNAME.crt ./docker-compose-data/certbot
 
 ##setting up nginx configuration file
+chmod +x ./nginx_exp_conf.sh
 source ./nginx_exp_conf.sh
 
 #run docker compose
