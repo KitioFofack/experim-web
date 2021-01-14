@@ -2,7 +2,6 @@ function pageRedirect() {
     window.location.replace("Confirmation_d_inscription.html");
 }
 
-
 function submit(event) {
 
 	inputs = document.getElementsByTagName("input");
@@ -39,13 +38,14 @@ function submit(event) {
             modalShow("Date incorrect !");
             break;
         }
-
-		tour+=1;
+        console.log(i + " " + tour + " " + inputs.length);
+		tour=i;
 		
 	}
-
-	if (tour == 4) {
+    console.log(inputs[3].value + " " + tour);
+	if (tour == 6) {
           var url = location.origin+"/submitMentor";
+          console.log(inputs[3].value);
 		  var settings = {
                     "url": url,
                     "method": "POST",
@@ -71,6 +71,12 @@ function submit(event) {
 	}
 
 }
+
+flatpickr("#dateTime", {
+    disable: [new Date()],
+    enableTime: true,
+    dateFormat: "Y-m-d H:i",
+});
 
 
 
