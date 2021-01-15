@@ -7,9 +7,11 @@
 <title>Inscription-mentor</title>
 <link rel="stylesheet" type="text/css" id="applicationStylesheet" href="css/Inscription_mentor.css"/>
 <link rel="stylesheet" href="css/shared/popup.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 	<!-- Adding bootstrapp and jquery js files -->
 	<script type="text/javascript" src="js/shared/bootstrap/jquery.min.js"></script>
 	<script type="text/javascript" src="js/shared/bootstrap/bootstrap.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
 
 </head>
@@ -83,7 +85,7 @@
 	</div>
 	<div data-type="Group" data-name="Groupe 821" id="Groupe_821_ebp" class="input-container">
 		<label for="Nom">Disponibilite ( pour prise de contact )</label>
-		<input type="datetime-local" name="disponibilite">
+		<input type="text" id="dateTime" name="disponibilite">
 	</div>
 	
 	<div data-type="Group" data-name="Groupe 827" id="Groupe_827_ecd">
