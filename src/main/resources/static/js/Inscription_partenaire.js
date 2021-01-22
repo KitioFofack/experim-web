@@ -9,7 +9,7 @@ function submit() {
 	inputs = document.getElementsByTagName("input");
 	var regex_mail = /^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$/;
 	var regex_contact_name = /^[a-zA-ZêëïäâéèôÔÊËÏÄÉÈÂ]+[0-9a-zA-ZêëïäâéèôÔÊËÏÄÉÈÂ' -]{0,}$/;
-	var regex_company_name = /^[0-9a-zA-ZêëïäâéèôÔÊËÏÄÉÈÂ]+[.0-9a-zA-ZêëïäâéèôÔÊËÏÄÉÈÂ' -]{1,}$/;
+	var regex_company_name = /^[0-9a-zA-ZêëïäâéèôÔÊËÏÄÉÈÂ]+[.0-9a-zA-ZêëïäâéèôÔÊËÏÄÉÈÂ&' -]{1,}$/;
 	var regex_num = /^[\+]?(1[ .-]?)?(\([2-9]\d{2}\)[ .-]?|([2-9]\d{2}[ .-]?)){2}\d{4}$/;
 
 	for (let i = 0; i < inputs.length; i++) {
@@ -22,7 +22,7 @@ function submit() {
 		}
 
 		if (i == 0 && !regex_company_name.test(inputs[i].value.trim())) {
-		    modalShow("Nom de l'entreprise invalide");
+		    modalShow("Nom de l'organisme invalide");
 		    break;
 		}
 
