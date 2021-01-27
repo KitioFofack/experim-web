@@ -32,7 +32,7 @@ $(document).ready(
 						tab_input[index].name = tab_input[index].name.replace('_',' ');
 					}
 					//show alert dialog
-					modalShow("Le champs "+tab_input[index].name+" n'est pas valide !");
+					modalShow("Veillez remplir le champs "+tab_input[index].name);
 					count_err = count_err +1;
 					break;
 				}
