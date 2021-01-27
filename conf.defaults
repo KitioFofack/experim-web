@@ -1,3 +1,5 @@
+#informations that needed to create ssl key and cert
+
 COUNTRY="CA"
 STATE="Quebec"
 LOCALITY="Montreal"
