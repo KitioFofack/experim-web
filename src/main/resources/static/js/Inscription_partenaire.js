@@ -14,10 +14,11 @@ function submit() {
 
 	for (let i = 0; i < inputs.length; i++) {
 		if (inputs[i].value == "") {
-			name = inputs[i].name;
-			name = name.replace('_', ' ');
-			name = name.replace('_', ' ');
-			modalShow("Veuillez entrer le "+ name);
+			//check if name attribute contains underscore and replace it with space
+            while(inputs[i].name.indexOf('_') >= 0) {
+                inputs[i].name = inputs[i].name.replace('_',' ');
+                }
+			modalShow("Veuillez entrer le Champs "+ inputs[i].name);
 			break;
 		}
 
