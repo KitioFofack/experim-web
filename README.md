@@ -20,8 +20,19 @@ then
  erpnextServerURLurl= http://capetc.dev.irex.aretex.ca
  erpnextAccount=testexperim@irex.aretex.ca
  erpnextAccountPassword=Test@123
-6- run as root user the script deployWithDocker.sh(uncomment some lines if needed)
+6 - Make sure dns resolution is working on your server 
+ sudo apt install dnsutils // install dns tools
+ dig $HOSTNAME 
+ or 
+ nslookup $HOSTNAME // should return a results containing your hostname and your ip address
+The commands bellow will show your hostname
+ echo $HOSTNAME // show your hostname
+ hostname -i // show your ip address
+Make sur resolution is ok before the next step
+
+7- run as root user the script deployWithDocker.sh(uncomment some lines if needed)
  chmod +x deployWithDocker.sh
  sudo ./deployWithDocker.sh
-7- go to your favorite navigator at this address http(s)://$HOSTNAME/ or lauch with the ip-address
-8- you can test your leap(prospect) creation using the url and credential at step 5
+8- go to your favorite navigator at this address http(s)://your_hostname to launch with the ip-address
+
+9- you can test your leap(prospect) creation using the url and credential at step 5
