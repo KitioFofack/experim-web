@@ -2,9 +2,12 @@
 
 #back to home
 #cd ~
+##update package repo
+apt-get update
 
 ## Install git
 #apt-get install git -y
+
 ## install openssl
 apt-get install -y openssl certbot
 
