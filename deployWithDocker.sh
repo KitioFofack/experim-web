@@ -47,14 +47,15 @@ docker build -t experim:v1 .
 
 ##Key generation
 echo "--------> generating key"
-openssl genrsa -aes256 -passout pass:$PASSWORD -out $HOSTNAME.key 4046
-##Remove pem phrase from the key
-openssl rsa -in ./$HOSTNAME.key -passin pass:$PASSWORD -out $HOSTNAME.key
 
-##Creating a certificate
-openssl req -key ./$HOSTNAME.key -new -x509 -days 365 -out $HOSTNAME.crt -passin pass:$PASSWORD -subj "/C=$COUNTRY/ST=$STATE/L=$LOCALITY/O=$ORGANIZATION/OU=$ORGANIZATIONALUNIT/CN=$HOSTNAME/emailAddress=$EMAIL"
+cd ../step-ca-client
+./MainScript.sh 2>&1 | tee install.log
+
+cd ../experim-web
 mkdir docker-compose-data/certbot
-mv $HOSTNAME.key $HOSTNAME.crt ./docker-compose-data/certbot
+#mv $HOSTNAME.key $HOSTNAME.crt ./docker-compose-data/certbot
+cp /etc/letsencrypt/live/$HOSTNAME/fullchain.pem ./docker-compose-data/certbot
+cp /etc/letsencrypt/live/$HOSTNAME/privkey.pem ./docker-compose-data/certbot
 
 ##setting up nginx configuration file
 chmod +x nginx_exp_conf.sh
