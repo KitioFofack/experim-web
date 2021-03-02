@@ -25,8 +25,8 @@ server {
 	proxy_set_header X-Forwarded-Host \$server_name;
     }
 
-    ssl_certificate /etc/ssl/nginx/$HOSTNAME.crt;
-    ssl_certificate_key /etc/ssl/nginx/$HOSTNAME.key;
+    ssl_certificate /etc/ssl/nginx/fullchain.pem;
+    ssl_certificate_key /etc/ssl/nginx/privkey.pem;
 
 
 }
