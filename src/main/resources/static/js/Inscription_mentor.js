@@ -36,7 +36,7 @@ function submit(event) {
 
         if (i == 3 && Date.parse(inputs[i].value) < Date.now()) {
             console.log(Date.parse(inputs[i].value) + " " + Date.now());
-            modalShow("Date incorrect !");
+            modalShow("veillez choisir au moins un jour après aujourd'hui !");
             break;
         }
 
@@ -44,7 +44,7 @@ function submit(event) {
 		
 	}
 
-	if (tour == 4) {
+	if (tour == 7) {
           var url = location.origin+"/submitMentor";
 		  var settings = {
                     "url": url,
@@ -65,14 +65,16 @@ function submit(event) {
 
             $.ajax(settings).done(function (response) {
               console.log(response);
+              pageRedirect();
             });
-
-		pageRedirect();
 
 	}
 
 }
-
+flatpickr("#dateTime", {
+    enableTime: true,
+    dateFormat: "Y-m-d H:i",
+});
 
 
 

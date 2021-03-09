@@ -1,85 +1,74 @@
 
-
-/*
-	My Own Code
-*/
-
 function pageRedirect() {
 	window.location.replace("Confirmation_d_inscription.html");
 }
 
 
-$(document).ready(
-	function () {
+function submit() {
 
-		var button = $('#custom-alert-box-button');
+    inputs = document.getElementsByTagName("input");
+    var regex_mail = /^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$/;
+    var regex_contact_name = /^[a-zA-ZêëïäâéèôÔÊËÏÄÉÈÂ]+[0-9a-zA-ZêëïäâéèôÔÊËÏÄÉÈÂ' -]{0,}$/;
+    var regex_company_name = /^[0-9a-zA-ZêëïäâéèôÔÊËÏÄÉÈÂ]+[.0-9a-zA-ZêëïäâéèôÔÊËÏÄÉÈÂ&' -]{1,}$/;
+    var regex_num = /^[\+]?(1[ .-]?)?(\([2-9]\d{2}\)[ .-]?|([2-9]\d{2}[ .-]?)){2}\d{4}$/;
+    var count_err = 0;
 
-		//My submit function	
-		button.on("click", function (event) {
-			
-			//get all champs
-			var tab_input = $(":input");
-			var regex = /^[a-zA-Z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$/;
-			var regex_num = /^[\+]?(1[ .-]?)?(\([2-9]\d{2}\)[ .-]?|([2-9]\d{2}[ .-]?)){2}\d{4}$/;
-			var count_err = 0;
+    for (let index = 0; index < inputs.length; index++) {
+        if (inputs[index].value == "") {
+            //check if name attribute contains underscore and replace it with space
+            while(inputs[index].name.indexOf('_') >= 0) {
+                inputs[index].name = inputs[index].name.replace('_',' ');
+            }
+            //show alert dialog
+            modalShow("Veillez remplir le champs "+inputs[index].name);
+            break;
+        }
+        if (index == 0 && !regex_company_name.test(inputs[index].value.trim())) {
+            modalShow("Nom de l'entreprise invalide");
+            break;
+        }
 
-			for (let index = 0; index < 4; index++) {
-				
-				if (tab_input[index].value=="") {
-					
-					//check if name attribute contains underscore and replace it with space
-					while(tab_input[index].name.indexOf('_') >= 0) {
-						tab_input[index].name = tab_input[index].name.replace('_',' ');
-					}
-					//show alert dialog
-					modalShow("Le champs "+tab_input[index].name+" n'est pas valide !");
-					count_err = count_err +1;
-					break;
-				}
-			}
+        if (index == 1 && !regex_contact_name.test(inputs[index].value.trim())) {
+            modalShow("Nom du contact invalide");
+            break;
+        }
+        if (index == 2 && !regex_mail.test(inputs[index].value.trim())) {
+            modalShow("Adresse électronique invalide !");
+            break;
+        }
+        else if(index == 3) {
+            if(!regex_num.test(inputs[index].value.trim())){
+                modalShow("Numéro de téléphone invalide !");
+                break;
+            }
+            else
+            {
+                 var url=location.origin+"/submitEmployeur";
+                 var settings = {
+                    "url": url,
+                    "method": "POST",
+                    "timeout": 0,
+                    "headers": {
+                        "Content-Type": "application/json"
+                    },
+                    "data": JSON.stringify(
+                        {
+                            "company_name": inputs[0].value.trim(),
+                            "lead_name": inputs[1].value.trim(),
+                            "email" : inputs[2].value.trim(),
+                            "phone": inputs[3].value.trim()
+                        }
+                    ),
+                 };
 
-			// redirect if it has no problem
-			if (count_err == 0) {
-				if (!regex.test(tab_input[2].value)) {
-					modalShow("Le champs "+tab_input[2].name+" n'est pas valide !");
-				}
-
-				else if(!regex_num.test(tab_input[3].value)){
-                    while(tab_input[3].name.indexOf('_') >= 0) {
-                        tab_input[3].name = tab_input[3].name.replace('_',' ');
-                    }
-                    modalShow("Le champs "+tab_input[3].name+" n'est pas valide !");
-                }
-				else
-				{
-				    var url=location.origin+"/submitEmployeur";
-					 var settings = {
-                                "url": url,
-                                "method": "POST",
-                                "timeout": 0,
-                                "headers": {
-                                    "Content-Type": "application/json"
-                                },
-                                "data": JSON.stringify(
-                                    {
-                                        "company_name": tab_input[0].value.trim(),
-                                        "lead_name": tab_input[1].value.trim(),
-                                        "email" : tab_input[2].value.trim(),
-                                        "phone": tab_input[3].value.trim()
-                                    }
-                                ),
-                            };
-
-                        $.ajax(settings).done(function (response) {
-                          console.log(response);
-                        });
-					pageRedirect();
-				}
-			}
-
-		});
-	}
-);
+                $.ajax(settings).done(function (response) {
+                  console.log(response);
+                  pageRedirect();
+                });
+            }
+        }
+    }
+}
 
 
 ///////////////////////////////////////

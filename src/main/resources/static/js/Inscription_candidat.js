@@ -11,7 +11,9 @@ function submit() {
 	pw = document.getElementById("pw").value;
 	cpw = document.getElementById("cpw").value;
 	inputs = document.getElementsByTagName("input");
-	var regex = /^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$/;
+	var regex_mail = /^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$/;
+	var regex_name = /^[a-zA-ZêëïäâéèôÔÊËÏÄÉÈÂ]+[0-9a-zA-ZêëïäâéèôÔÊËÏÄÉÈÂ' -]{0,}$/;
+	var regex_num = /^[\+]?(1[ .-]?)?(\([2-9]\d{2}\)[ .-]?|([2-9]\d{2}[ .-]?)){2}\d{4}$/;
 	var tour = 0;
 
 	for (let i = 0; i < inputs.length; i++) {
@@ -19,13 +21,29 @@ function submit() {
 			name = inputs[i].name;
 			name = name.replace('_', ' ');
 			name = name.replace('_', ' ');
+			name = name.replace('_', ' ');
 			modalShow("Veuillez entrer le champs "+ name);
 			break;
 		}
-		if (i == 1 && !regex.test(inputs[1].value)){
-			modalShow("Le champs couriel n'est pas valide !");
+
+		if (i == 0 && !regex_name.test(inputs[i].value.trim())){
+            modalShow("Nom invalide !");
+            break;
+        }
+		if (i == 1 && !regex_mail.test(inputs[1].value.trim())){
+			modalShow("adresse électronique invalide !");
 			break;
 		}
+
+		if (i == 2 && !regex_num.test(inputs[i].value.trim())){
+            modalShow("Numéro de téléphone invalide !");
+            break;
+        }
+
+        if (i == 3 && inputs[i].value.length < 6){
+            modalShow("Le mot de passe doit contenir au moins 6 caracteres");
+            break;
+        }
 
 		if (i == 4 && inputs[i].value != inputs[i-1].value) {
 			var erreur = "Les mots de passe ne sont pas identiques !"
@@ -47,17 +65,17 @@ function submit() {
             },
             "data": JSON.stringify(
                 {
-                    "lead_name":inputs[0].value,
-                    "email_id":inputs[1].value,
-                    "phone": inputs[2].value
+                    "lead_name":inputs[0].value.trim(),
+                    "email_id":inputs[1].value.trim(),
+                    "phone": inputs[2].value.trim()
                 }
             ),
         };
 
     $.ajax(settings).done(function (response) {
       console.log(response);
+      pageRedirect();
     });
-    pageRedirect();
 	}
 
 }

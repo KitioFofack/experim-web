@@ -7,9 +7,11 @@
 <title>Inscription-mentor</title>
 <link rel="stylesheet" type="text/css" id="applicationStylesheet" href="css/Inscription_mentor.css"/>
 <link rel="stylesheet" href="css/shared/popup.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 	<!-- Adding bootstrapp and jquery js files -->
 	<script type="text/javascript" src="js/shared/bootstrap/jquery.min.js"></script>
 	<script type="text/javascript" src="js/shared/bootstrap/bootstrap.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
 
 </head>
@@ -71,19 +73,19 @@
 
 	<div data-type="Group" data-name="Groupe 818" id="Groupe_818_ebd" class="input-container">
 		<label for="Nom">Nom</label>
-		<input type="text" name="nom" placeholder="Votre nom">
+		<input type="text" name="Nom" placeholder="Votre nom">
 	</div>
 	<div data-type="Group" data-name="Groupe 819" id="Groupe_819_ebh" class="input-container">
-		<label for="Couriel">Couriel</label>
-		<input type="email" name="couriel" placeholder="Votre adresse email">
+		<label for="Courriel">Courriel</label>
+		<input type="email" name="Courriel" placeholder="Votre adresse électronique">
 	</div>
 	<div data-type="Group" data-name="Groupe 820" id="Groupe_820_ebl" class="input-container">
-		<label for="Nom">Telephone</label>
-		<input type="text" name="telephone" placeholder="xxx yyy-zzzz">
+		<label for="Téléphone">Téléphone</label>
+		<input type="text" name="Téléphone" placeholder="xxx yyy-zzzz">
 	</div>
 	<div data-type="Group" data-name="Groupe 821" id="Groupe_821_ebp" class="input-container">
-		<label for="Nom">Disponibilite ( pour prise de contact )</label>
-		<input type="datetime-local" name="disponibilite">
+		<label for="Disponibilité">Disponibilité ( pour prise de contact )</label>
+		<input type="text" id="dateTime" name="Disponibilité" placeholder="2019-11-31 14:00">
 	</div>
 	
 	<div data-type="Group" data-name="Groupe 827" id="Groupe_827_ecd">
