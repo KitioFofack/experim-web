@@ -1,0 +1,10 @@
+#This file contents the application.properties variables values
+#to login into erpNext server
+
+#link to the erp server
+ERP_SERVER_URL="http://capetc.dev.irex.aretex.ca"
+#user email that will be user to connect to the erp server
+ERP_USER_EMAIL="test@dev.irex.aretex.ca"
+#password to authenticate the former user
+ERP_USER_PASSWORD="Test@123"
+

@@ -1,27 +1,21 @@
 package ca.aretex.irex.experim.service;
 
-import ca.aretex.irex.experim.bean.Client;
+import ca.aretex.irex.experim.bean.request.Prospectable;
+import ca.aretex.irex.experim.bean.response.LeadData;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.typesafe.config.Config;
+import com.typesafe.config.ConfigFactory;
 import lombok.extern.slf4j.Slf4j;
-import okhttp3.*;
-import org.jetbrains.annotations.NotNull;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpStatus;
+import org.springframework.http.*;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.client.RestTemplate;
 
-import java.io.IOException;
-import java.net.CookieManager;
-import java.net.CookiePolicy;
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Slf4j
 @Repository
 public class ERPNextRepository {
-
-    private static OkHttpClient client;
 
     @Value("${erpnextServerURL}")
     private String erpnextServerURL;
@@ -32,72 +26,76 @@ public class ERPNextRepository {
     @Value("${erpNextAccountPassword}")
     private String erpNextAccountPassword;
 
-    List<Cookie> cookieList;
-    public HttpStatus save(Client clt) {
-        Response response;
-        log.info ("About to save {}", clt);
+    private static final Config config = ConfigFactory.load("application.properties");
+    private static final ObjectMapper objectMapper = new ObjectMapper();
+    private static final RestTemplate restTemplate = new RestTemplate();
+
+    private final HttpHeaders httpHeaders = new HttpHeaders();
+    private static boolean isLogout = true;
+
+    public HttpStatus save(Prospectable prospectable) {
+        //Response response;
+        log.info ("About to save {}", prospectable);
+        ResponseEntity<LeadData> response = null;
         try {
-            if (client == null) {
-                log.info("Client eunexistant, we have to instanciate one");
-                openConnexion();
+            if(isLogout){
+                login();
             }
-            MediaType mediaType = MediaType.parse("application/json");
-
-            RequestBody body = RequestBody.create( "" + clt, mediaType);
-
-            String url = new StringBuilder().append(erpnextServerURL).append("/api/resource/Lead").toString();
-
+            String url = erpnextServerURL + "/api/resource/Lead";
             log.info("Request url: {}",url);
 
-            Request request = new Request.Builder()
-                    .url(url)
-                    .method("POST", body)
-//                    .addHeader("Authorization", token)
-                    .addHeader("Content-Type", "application/json")
-                    .addHeader("Cookie", cookieList.stream()
-                            .map(c -> c.toString())
-                            .collect(Collectors.joining(";")))
-                    .build();
-            log.info("Data request using cookie string  : {}", cookieList.stream()
-                    .map(c -> c.toString())
-                    .collect(Collectors.joining(";")));
-            log.info("request to be sent {}", request);
-//            logger.info("sending request with following parameter token: {} , remote service Endpoint: {}, ", token, erpnextServerURL);
-            response = client.newCall(request).execute();
+            HttpEntity<String> entity = new HttpEntity<>(objectMapper.writeValueAsString(prospectable), httpHeaders);
+
+            log.info("request to be sent {}", entity);
+            response = restTemplate.exchange(url, HttpMethod.POST, entity, LeadData.class);
             log.info("Request successfull, here is the response:  {}", response);
         } catch (Exception e) {
-            e.printStackTrace();
+           log.error("Could not save Prospectable={} due to", prospectable, e);
+        } finally {
+            logout();
         }
-        return HttpStatus.CREATED;
+        return response!=null ? response.getStatusCode(): HttpStatus.FAILED_DEPENDENCY;
     }
 
-    private void openConnexion() throws IOException {
+    private void updateHttpHeaders(List<String> cookies) {
+        httpHeaders.set("Cookie", String.join(";", cookies));
+    }
 
-        client = new OkHttpClient().newBuilder().build();
+    private void login() {
+        log.info("login into erpnext...");
+        String bodyString = String.format(
+                "{\"usr\":\"%s\",\"pwd\":\"%s\"}",
+                config.getString("erpNextAccount"), config.getString("erpNextAccountPassword")
+        );
 
-        okhttp3.MediaType mediaType = MediaType.parse("application/json");
+        String urlLogin = config.getString("erpnextServerURL") + "/api/method/login";
+        httpHeaders.setContentType(MediaType.APPLICATION_JSON);
 
-        String bodyString = "{\"usr\":\"kfofack@irex.aretex.ca\",\"pwd\":\"vtgn3fdh\"}";
-
-        okhttp3.RequestBody body = RequestBody.create( "" + bodyString, mediaType);
-
-        String url = new StringBuilder().append(erpnextServerURL).append("/api/method/login").toString();
+        HttpEntity<String> entity = new HttpEntity<>(bodyString, httpHeaders);
+        ResponseEntity<byte[]> response = restTemplate.exchange(urlLogin, HttpMethod.POST, entity, byte[].class);
 
         log.info("Sending request for connection opening with following parameters");
-        log.info("URL String : {}",url);
-        log.info("Body Sring : {}",bodyString);
-        okhttp3.Request request = new Request.Builder()
-                .url(url)
-                .method("POST", body)
-                .addHeader("Content-Type", "application/json")
-                .build();
-        log.info("request to be sent for authentication {}", request);
-        Response response = client.newCall(request).execute();
+        log.info("URL String : {}",urlLogin);
         log.info("Response returned : {}", response);
-        Headers headers= response.headers();
+        HttpHeaders headers = response.getHeaders();
         log.info("headers received {}", headers);
-        List<Cookie> cookies = Cookie.parseAll(HttpUrl.parse(erpnextServerURL), headers);
-        log.info("Cookies received {}", cookies);
-        cookieList=cookies;
+        log.info("Cookies received {}", headers.get(HttpHeaders.SET_COOKIE));
+        List<String> cookies = headers.getValuesAsList(HttpHeaders.SET_COOKIE);
+        isLogout = false;
+        updateHttpHeaders(cookies);
+    }
+
+    private void logout(){
+        try {
+            log.info("logout from erpnext...");
+            String urlLogout = config.getString("erpnextServerURL") + "/api/method/logout";
+            HttpEntity<String> entityLogout = new HttpEntity<>(httpHeaders);
+
+            ResponseEntity<String> responseLogout = restTemplate.exchange(urlLogout, HttpMethod.GET, entityLogout, String.class);
+            log.info("response for logging out {} ", responseLogout);
+            isLogout = true;
+        } catch (Exception ex){
+            log.error("logout failed due to ", ex);
+        }
     }
 }

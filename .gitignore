@@ -33,5 +33,4 @@ build/
 .vscode/
 /.mvn/
 /.idea/
-
-app.log
+logs
