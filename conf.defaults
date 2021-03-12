@@ -1,9 +1,10 @@
-#informations that needed to create ssl key and cert
+#This file contents the application.properties variables values
+#to login into erpNext server
 
-COUNTRY="CA"
-STATE="Quebec"
-LOCALITY="Montreal"
-ORGANIZATION="ARETEX"
-ORGANIZATIONALUNIT="IREX"
-EMAIL="contact-irex@aretex.ca"
-PASSWORD="password"
+#link to the erp server
+ERP_SERVER_URL="http://capetc.dev.irex.aretex.ca"
+#user email that will be user to connect to the erp server
+ERP_USER_EMAIL="test@dev.irex.aretex.ca"
+#password to authenticate the former user
+ERP_USER_PASSWORD="Test@123"
+
