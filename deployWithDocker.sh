@@ -1,25 +1,8 @@
 #!/bin/bash
 
-#back to home
-#cd ~
 ##update package repo
 apt-get update
 
-## Install git
-#apt-get install git -y
-
-## install openssl
-apt-get install -y openssl certbot
-
-##rmove all directory
-#rm -rf ~/experim-web
-##clone the repository
-#echo "-----> clone the repo"
-#git clone https://github.com/KitioFofack/experim-web.git
-#cd ~/experim-web
-
-#checkout to main branch
-#git checkout rest_template_docker_compose
 
 #install maven
 echo "----------> Install maven"
@@ -29,6 +12,12 @@ apt-get install -y maven
 #cd ~/experim-web/
 
 source conf.defaults
+
+#set values in the application properties' file
+WD="src/main/resources/application.properties"
+sed -i "s|erpnextServerURL=.*|erpnextServerURL=$ERP_SERVER_URL|g" $WD
+sed -i "s|erpNextAccount=.*|erpNextAccount=$ERP_USER_EMAIL|g" $WD
+sed -i "s|erpNextAccountPassword=.*|erpNextAccountPassword=$ERP_USER_PASSWORD|g" $WD
 
 #create jar package
 echo "-----------> Create jar package"
@@ -53,7 +42,6 @@ cd ../step-ca-client
 
 cd ../experim-web
 mkdir docker-compose-data/certbot
-#mv $HOSTNAME.key $HOSTNAME.crt ./docker-compose-data/certbot
 cp /etc/letsencrypt/live/$HOSTNAME/fullchain.pem ./docker-compose-data/certbot
 cp /etc/letsencrypt/live/$HOSTNAME/privkey.pem ./docker-compose-data/certbot
 
