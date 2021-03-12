@@ -3,7 +3,6 @@ function pageRedirect() {
 	window.location.replace("Confirmation_d_inscription.html");
 }
 
-
 function submit() {
 
     inputs = document.getElementsByTagName("input");
