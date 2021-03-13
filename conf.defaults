@@ -2,11 +2,11 @@
 #to login into erpNext server
 
 #link to the erp server
-ERP_SERVER_URL="http://capetc.dev.irex.aretex.ca"
+ERP_SERVER_URL="http://erpnext.capetc.aretex.ca"
 #user email that will be user to connect to the erp server
-ERP_USER_EMAIL="test@dev.irex.aretex.ca"
+ERP_USER_EMAIL="experim-backend-user@capetc.aretex.ca"
 #password to authenticate the former user
-ERP_USER_PASSWORD="Test@123"
+ERP_USER_PASSWORD="3xp3r1m-b1ck3nd"
 
 
 SERVER_NAME=$(hostname)
