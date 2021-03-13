@@ -8,3 +8,29 @@ ERP_USER_EMAIL="test@dev.irex.aretex.ca"
 #password to authenticate the former user
 ERP_USER_PASSWORD="Test@123"
 
+
+SERVER_NAME=$(hostname)
+
+#get url of Step client repository
+URL_REPO="https://gitface-prod.irex.aretex.ca/irex-docker-projects/mirroring-iaas-projects/authentication/step-ca-client.git"
+
+########Information for get certificate with client script....#####
+##get the step server hostname
+STEP_CA_HOST="step-ca.uat.irex.aretex.ca"
+
+##get the step client server
+STEP_CLIENT_NAME=$SERVER_NAME
+
+
+##get the IP of step server
+STEP_CA_IP="192.168.33.202"
+
+##get the port for access to step-ca service, make sure it's the correct value with step-server
+PORT_ACCESS=8443
+
+##get the user who has installed step-ca server
+STEP_CA_USER="debian"
+
+##get the pass of user
+STEP_CA_PASS_USER="debian"
+
