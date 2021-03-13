@@ -1,15 +1,20 @@
 #!/bin/bash
 
 ##update package repo
-apt-get update
+sudo apt-get update -y
 
 
 #install maven
 echo "----------> Install maven"
-apt-get install -y maven
+sudo apt-get install -y maven
 
 #enter into the project directory
 #cd ~/experim-web/
+sudo apt-get -y install dnsutils
+
+sudo chown -R $USER: .
+
+source getCertificates.sh
 
 source conf.defaults
 
@@ -25,25 +30,26 @@ mvn clean package
 
 #remove image if exist
 echo "-------->remove existing image, no be affraid by error"
-docker rmi -f experim:v1
-docker rm -f experim-docker
-docker rmi -f nginx:1.15-alpine
-docker rm -f webserver
+sudo docker rmi -f experim:v1
+sudo docker rm -f experim-docker
+sudo docker rmi -f nginx:1.15-alpine
+sudo docker rm -f webserver
 
 #build image
 echo "--------> build docker image"
-docker build -t experim:v1 .
+sudo docker build -t experim:v1 .
 
 ##Key generation
 echo "--------> generating key"
 
-cd ../step-ca-client
-./MainScript.sh 2>&1 | tee install.log
+#cd ../step-ca-client
+#./MainScript.sh 2>&1 | tee install.log
 
-cd ../experim-web
+#cd ../experim-web
+
 mkdir docker-compose-data/certbot
-cp /etc/letsencrypt/live/$HOSTNAME/fullchain.pem ./docker-compose-data/certbot
-cp /etc/letsencrypt/live/$HOSTNAME/privkey.pem ./docker-compose-data/certbot
+sudo cp /etc/letsencrypt/live/$HOSTNAME/fullchain.pem ./docker-compose-data/certbot
+sudo cp /etc/letsencrypt/live/$HOSTNAME/privkey.pem ./docker-compose-data/certbot
 
 ##setting up nginx configuration file
 chmod +x nginx_exp_conf.sh
@@ -52,6 +58,6 @@ source ./nginx_exp_conf.sh
 #run docker compose
 echo "--------> running docker compose"
 cd docker-compose-data
-docker-compose up
+sudo docker-compose up
 
 echo "---------->bye bye"
