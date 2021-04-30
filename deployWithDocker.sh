@@ -58,6 +58,6 @@ source ./nginx_exp_conf.sh
 #run docker compose
 echo "--------> running docker compose"
 cd docker-compose-data
-sudo docker-compose up
-
+docker-compose up -d
+cd ..
 echo "---------->bye bye"
